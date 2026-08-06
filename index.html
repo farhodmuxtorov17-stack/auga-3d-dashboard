@@ -452,104 +452,100 @@ const a=ASSETS.find(x=>x.id===currentAssetId)||ASSETS[0];
 const statusText=a.status==='active'?'Faol':a.status==='maintenance'?"Ta'mirda":'Rejada';
 const scoreColor=a.score>=80?'var(--green)':a.score>=60?'var(--orange)':'var(--red)';
 const gaugeDeg=(a.score/100)*180;
-return '<div class="fade-in">\
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--text-3)">\
-<span style="cursor:pointer;color:var(--green);font-weight:600" onclick="navigateTo(\'assets\')">Aktivlar</span>\
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>\
-<span style="color:var(--text);font-weight:600">'+a.name+'</span></div>\
-\
-<div style="display:grid;grid-template-columns:1fr 320px;gap:20px;margin-bottom:24px">\
-\
-<div class="card" style="overflow:hidden;padding:0">\
-<div style="position:relative;height:240px;overflow:hidden">\
-<img src="'+a.img+'" style="width:100%;height:100%;object-fit:cover">\
-<div style="position:absolute;top:16px;left:16px;display:flex;gap:8px">\
-<span class="status-badge '+a.status+'"><span class="status-dot"></span>'+statusText+'</span>\
-<span style="background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;font-family:IBM Plex Mono,monospace">'+a.code+'</span>\
-</div>\
-<div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:20px 24px">\
-<h2 style="color:#fff;font-size:22px;font-weight:700;margin-bottom:4px">'+a.name+'</h2>\
-<p style="color:rgba(255,255,255,.7);font-size:13px">'+a.region+' • '+a.type+'</p></div>\
-</div>\
-</div>\
-\
-<div class="card" style="padding:24px;text-align:center">\
-<div style="font-size:13px;font-weight:600;color:var(--text-3);margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px">Sog\'liq indeksi</div>\
-<div style="position:relative;width:160px;height:100px;margin:0 auto 8px">\
-<svg width="160" height="100" viewBox="0 0 160 100">\
-<path d="M 10 90 A 70 70 0 0 1 150 90" fill="none" stroke="#F0F1F4" stroke-width="12" stroke-linecap="round"/>\
-<path d="M 10 90 A 70 70 0 0 1 '+String(10+140*gaugeDeg/180)+' '+String(90-70*Math.sin(Math.PI*gaugeDeg/180))+'" fill="none" stroke="'+scoreColor+'" stroke-width="12" stroke-linecap="round"/>\
-</svg>\
-<div style="position:absolute;top:50px;left:50%;transform:translateX(-50%);text-align:center">\
-<div style="font-size:36px;font-weight:800;color:'+scoreColor+';line-height:1">'+a.score+'</div>\
-<div style="font-size:11px;color:var(--text-3);margin-top:2px">/ 100</div></div>\
-</div>\
-<div style="font-size:13px;color:var(--text-2);margin-top:8px">'+(a.score>=80?'A\'lovi holat':a.score>=60?'O\'rtacha':'Past daraja')+'</div>\
-</div>\
-</div>\
-\
-\
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">\
-<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Maydon</div><div style="font-size:20px;font-weight:700">'+a.area+'</div></div>\
-<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Qavatlar</div><div style="font-size:20px;font-weight:700">'+a.floors+' ta</div></div>\
-<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Qurilgan yil</div><div style="font-size:20px;font-weight:700">'+(a.year||'—')+'</div></div>\
-<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Bandlik</div><div style="font-size:20px;font-weight:700;color:'+(a.occupancy>=80?'var(--green)':a.occupancy>=50?'var(--orange)':'var(--red)')+'">'+a.occupancy+'%</div></div>\
-</div>\
-\
-\
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">\
-<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Texnik ma\'lumotlar</div>\
-<div style="display:flex;flex-direction:column;gap:12px">\
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Kadastr raqami</span><span style="font-weight:600;font-family:IBM Plex Mono,monospace;font-size:13px">12:34:567:890</span></div>\
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Elektr tarmog\'i</span><span style="font-weight:600;color:var(--green);font-size:13px">✓ Mavjud</span></div>\
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Gaz tarmog\'i</span><span style="font-weight:600;color:var(--green);font-size:13px">✓ Mavjud</span></div>\
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Suv ta\'minoti</span><span style="font-weight:600;color:var(--green);font-size:13px">✓ Mavjud</span></div>\
-<div style="display:flex;justify-content:space-between;padding:10px 0"><span style="color:var(--text-3);font-size:13px">Xavfsizlik tizimi</span><span style="font-weight:600;color:var(--green);font-size:13px">✓ Mavjud</span></div>\
-</div></div>\
-\
-<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Moliyaviy ko\'rsatkichlar</div>\
-<div style="display:flex;flex-direction:column;gap:12px">\
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Baholangan qiymat</span><span style="font-weight:700;font-size:13px">'+a.value+' so\'m</span></div>\
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Oylik ijara daromadi</span><span style="font-weight:700;font-size:13px;color:var(--green)">15,6 mln so\'m</span></div>\
-<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Yillik xarajatlar</span><span style="font-weight:600;font-size:13px">8,4 mln so\'m</span></div>\
-<div style="display:flex;justify-content:space-between;padding:10px 0"><span style="color:var(--text-3);font-size:13px">Sug\'urta polisi</span><span style="font-weight:600;font-size:13px;color:var(--green)">✓ Faol</span></div>\
-</div></div>\
-</div>\
-\
-\
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">\
-<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Kameralar</div>\
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">\
-<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-01</div><div style="color:#9CA3AF;font-size:10px">Kirish</div></div>\
-<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-02</div><div style="color:#9CA3AF;font-size:10px">Lobby</div></div>\
-<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-03</div><div style="color:#9CA3AF;font-size:10px">Parking</div></div>\
-<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--orange);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-04</div><div style="color:#9CA3AF;font-size:10px">Tom</div></div>\
-</div>\
-<div style="margin-top:12px;display:flex;gap:8px">\
-<button class="btn btn-outline btn-sm" onclick="navigateTo(\'access\')">Barcha kameralar</button>\
-<button class="btn btn-sm" style="background:var(--green-light);color:var(--green-dark)" onclick="showToast(\'Yangi kamera\')">+ Kamera</button>\
-</div></div>\
-\
-<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">So\'nggi hodisalar</div>\
-<div style="display:flex;flex-direction:column;gap:10px">\
-<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg-2)"><div style="width:32px;height:32px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div><div><div style="font-size:13px;font-weight:600">Shartnoma yangilandi</div><div style="font-size:11px;color:var(--text-3)">2 soat avval</div></div></div>\
-<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg-2)"><div style="width:32px;height:32px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div><div><div style="font-size:13px;font-weight:600">Yangi ijarachi ro\'yxatga olindi</div><div style="font-size:11px;color:var(--text-3)">5 soat avval</div></div></div>\
-<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg-2)"><div style="width:32px;height:32px;border-radius:50%;background:var(--orange-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div><div><div style="font-size:13px;font-weight:600">Texnik xizmat rejalashtirildi</div><div style="font-size:11px;color:var(--text-3)">1 kun avval</div></div></div>\
-</div></div>\
-</div>\
-\
-\
-<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Kadastr ma\'lumotlari (Bino Reestr)</div>\
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">\
-<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Manzil</div><div style="font-size:13px;font-weight:600">'+a.region+', Shayxontohur tumani, B. Malik ko\'chasi</div></div>\
-<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Turi</div><div style="font-size:13px;font-weight:600">'+a.type+'</div></div>\
-<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Holati</div><div style="font-size:13px;font-weight:600;color:var(--green)">Foydalanishda</div></div>\
-<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Reestr sanasi</div><div style="font-size:13px;font-weight:600;font-family:IBM Plex Mono,monospace">15.03.2021</div></div>\
-<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Egasi</div><div style="font-size:13px;font-weight:600">Davlat qo\'mitasi</div></div>\
-<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Sinxronlash</div><div style="font-size:13px;font-weight:600;color:var(--green)">✓ So\'nggi: 14:32</div></div>\
-</div></div>\
-\
-</div>';
+return `<div class="fade-in">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--text-3)">
+<span style="cursor:pointer;color:var(--green);font-weight:600" onclick="navigateTo('assets')">Aktivlar</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+<span style="color:var(--text);font-weight:600">${a.name}</span></div>
+
+<div style="display:grid;grid-template-columns:1fr 320px;gap:20px;margin-bottom:24px">
+
+<div class="card" style="overflow:hidden;padding:0">
+<div style="position:relative;height:240px;overflow:hidden">
+<img src="${a.img}" style="width:100%;height:100%;object-fit:cover">
+<div style="position:absolute;top:16px;left:16px;display:flex;gap:8px">
+<span class="status-badge ${a.status}"><span class="status-dot"></span>${statusText}</span>
+<span style="background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;font-family:IBM Plex Mono,monospace">${a.code}</span>
+</div>
+<div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:20px 24px">
+<h2 style="color:#fff;font-size:22px;font-weight:700;margin-bottom:4px">${a.name}</h2>
+<p style="color:rgba(255,255,255,.7);font-size:13px">${a.region} &bull; ${a.type}</p></div>
+</div>
+</div>
+
+<div class="card" style="padding:24px;text-align:center">
+<div style="font-size:13px;font-weight:600;color:var(--text-3);margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px">Sog'liq indeksi</div>
+<div style="position:relative;width:160px;height:100px;margin:0 auto 8px">
+<svg width="160" height="100" viewBox="0 0 160 100">
+<path d="M 10 90 A 70 70 0 0 1 150 90" fill="none" stroke="#F0F1F4" stroke-width="12" stroke-linecap="round"/>
+<path d="M 10 90 A 70 70 0 0 1 ${String(10+140*gaugeDeg/180)} ${String(90-70*Math.sin(Math.PI*gaugeDeg/180))}" fill="none" stroke="${scoreColor}" stroke-width="12" stroke-linecap="round"/>
+</svg>
+<div style="position:absolute;top:50px;left:50%;transform:translateX(-50%);text-align:center">
+<div style="font-size:36px;font-weight:800;color:${scoreColor};line-height:1">${a.score}</div>
+<div style="font-size:11px;color:var(--text-3);margin-top:2px">/ 100</div></div>
+</div>
+<div style="font-size:13px;color:var(--text-2);margin-top:8px">${a.score>=80?'A\u2019lovi holat':a.score>=60?'O\u2019rtacha':'Past daraja'}</div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">
+<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Maydon</div><div style="font-size:20px;font-weight:700">${a.area}</div></div>
+<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Qavatlar</div><div style="font-size:20px;font-weight:700">${a.floors} ta</div></div>
+<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Qurilgan yil</div><div style="font-size:20px;font-weight:700">${a.year||'—'}</div></div>
+<div class="card" style="padding:20px"><div style="font-size:12px;color:var(--text-3);margin-bottom:6px">Bandlik</div><div style="font-size:20px;font-weight:700;color:${a.occupancy>=80?'var(--green)':a.occupancy>=50?'var(--orange)':'var(--red)'}">${a.occupancy}%</div></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">
+<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Texnik ma\u2019lumotlar</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Kadastr raqami</span><span style="font-weight:600;font-family:IBM Plex Mono,monospace;font-size:13px">12:34:567:890</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Elektr tarmog\u2019i</span><span style="font-weight:600;color:var(--green);font-size:13px">&#10003; Mavjud</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Gaz tarmog\u2019i</span><span style="font-weight:600;color:var(--green);font-size:13px">&#10003; Mavjud</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Suv ta\u2019minoti</span><span style="font-weight:600;color:var(--green);font-size:13px">&#10003; Mavjud</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0"><span style="color:var(--text-3);font-size:13px">Xavfsizlik tizimi</span><span style="font-weight:600;color:var(--green);font-size:13px">&#10003; Mavjud</span></div>
+</div></div>
+
+<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Moliyaviy ko\u2019rsatkichlar</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Baholangan qiymat</span><span style="font-weight:700;font-size:13px">${a.value} so\u2019m</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Oylik ijara daromadi</span><span style="font-weight:700;font-size:13px;color:var(--green)">15,6 mln so\u2019m</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-3);font-size:13px">Yillik xarajatlar</span><span style="font-weight:600;font-size:13px">8,4 mln so\u2019m</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0"><span style="color:var(--text-3);font-size:13px">Sug\u2019urta polisi</span><span style="font-weight:600;font-size:13px;color:var(--green)">&#10003; Faol</span></div>
+</div></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">
+<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Kameralar</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-01</div><div style="color:#9CA3AF;font-size:10px">Kirish</div></div>
+<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-02</div><div style="color:#9CA3AF;font-size:10px">Lobby</div></div>
+<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-03</div><div style="color:#9CA3AF;font-size:10px">Parking</div></div>
+<div style="background:#0A0E14;border-radius:10px;padding:16px;text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--orange);margin:0 auto 8px"></div><div style="color:#fff;font-size:12px;font-weight:600">CAM-04</div><div style="color:#9CA3AF;font-size:10px">Tom</div></div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px">
+<button class="btn btn-outline btn-sm" onclick="navigateTo('access')">Barcha kameralar</button>
+<button class="btn btn-sm" style="background:var(--green-light);color:var(--green-dark)" onclick="openModal('newCameraModal')">+ Kamera</button>
+</div></div>
+
+<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">So\u2019nggi hodisalar</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg-2)"><div style="width:32px;height:32px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div><div><div style="font-size:13px;font-weight:600">Shartnoma yangilandi</div><div style="font-size:11px;color:var(--text-3)">2 soat avval</div></div></div>
+<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg-2)"><div style="width:32px;height:32px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div><div><div style="font-size:13px;font-weight:600">Yangi ijarachi ro\u2019yxatga olindi</div><div style="font-size:11px;color:var(--text-3)">5 soat avval</div></div></div>
+<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg-2)"><div style="width:32px;height:32px;border-radius:50%;background:var(--orange-light);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div><div style="font-size:13px;font-weight:600">Texnik xizmat rejalashtirildi</div><div style="font-size:11px;color:var(--text-3)">1 kun avval</div></div></div>
+</div></div>
+</div>
+
+<div class="card" style="padding:20px"><div class="section-title" style="margin-bottom:16px">Kadastr ma\u2019lumotlari (Bino Reestr)</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Manzil</div><div style="font-size:13px;font-weight:600">${a.region}, Shayxontohur tumani, B. Malik ko\u2019chasi</div></div>
+<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Turi</div><div style="font-size:13px;font-weight:600">${a.type}</div></div>
+<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Holati</div><div style="font-size:13px;font-weight:600;color:var(--green)">Foydalanishda</div></div>
+<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Reestr sanasi</div><div style="font-size:13px;font-weight:600">15.03.2021</div></div>
+<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Egasi</div><div style="font-size:13px;font-weight:600">Davlat qo\u2019mitasi</div></div>
+<div><div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Sinxronlash</div><div style="font-size:13px;font-weight:600;color:var(--green)">&#10003; So\u2019nggi: 14:32</div></div>
+</div></div>
+
+</div>`;
 }
 
 function renderSettings(){
