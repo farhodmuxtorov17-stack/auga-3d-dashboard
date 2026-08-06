@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUGA — Smart Asset Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & BASE ============ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --green:#7BC142; --green-dark:#5FA830; --green-light:#E8F5E9; --green-bg:#F0F9EB;
+  --bg:#F4F4F6; --card:#FFFFFF; --border:#E8E8EC; --border-light:#F0F0F4;
+  --text:#1A1D23; --text-2:#555A66; --text-3:#8C919D; --text-4:#B0B5BF;
+  --blue:#2D7FF9; --orange:#F97316; --red:#EF4444; --yellow:#F59E0B;
+  --radius:12px; --radius-sm:8px; --radius-lg:16px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06); --shadow:0 2px 8px rgba(0,0,0,.06); --shadow-md:0 4px 20px rgba(0,0,0,.08); --shadow-lg:0 8px 32px rgba(0,0,0,.1);
+  --sidebar-w:248px;
+}
+html,body{height:100%;font-family:'Onest',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',monospace}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+input{font-family:inherit}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#D0D5DB;border-radius:3px}
+
+/* ============ LOGIN ============ */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#FAFBFC;position:relative;overflow:hidden}
+.login-page::before{content:'';position:absolute;top:-200px;left:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,193,66,.06) 0%,transparent 70%)}
+.login-page::after{content:'';position:absolute;bottom:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,193,66,.06) 0%,transparent 70%)}
+.login-card{position:relative;width:420px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 36px;box-shadow:var(--shadow-md);z:1}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.login-logo img{width:36px;height:36px}
+.login-logo span{font-size:22px;font-weight:800;letter-spacing:-.5px}
+.login-card h1{font-size:24px;font-weight:700;margin-bottom:6px}
+.login-card .sub{color:var(--text-3);font-size:14px;margin-bottom:24px}
+.field-group{margin-bottom:16px}
+.field-group label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;color:var(--text)}
+.field-wrap{position:relative}
+.field-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-3)}
+.field-wrap input{width:100%;height:46px;padding:0 14px 0 42px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s;background:#FAFBFC}
+.field-wrap input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(123,193,66,.12);background:#fff}
+.field-wrap .eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-3);cursor:pointer;padding:4px}
+.login-row{display:flex;justify-content:space-between;align-items:center;margin:16px 0 20px}
+.check-line{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2)}
+.check-line input[type=checkbox]{width:16px;height:16px;accent-color:var(--green)}
+.forgot-link{font-size:13px;color:var(--green);font-weight:500}
+.login-btn{width:100%;height:46px;background:var(--green);color:#fff;border-radius:var(--radius-sm);font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s,transform .1s}
+.login-btn:hover{background:var(--green-dark)}
+.login-btn:active{transform:scale(.98)}
+.role-section{margin-top:24px}
+.role-label{font-size:13px;font-weight:500;color:var(--text-3);margin-bottom:8px;text-align:center}
+.role-tabs{display:flex;gap:8px}
+.role-tab{flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:500;color:var(--text-2);background:#fff;transition:all .2s}
+.role-tab.active{background:var(--green-light);border-color:var(--green);color:var(--green-dark)}
+.demo-note{text-align:center;margin-top:16px;font-size:12px;color:var(--text-4)}
+
+/* ============ APP LAYOUT ============ */
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* ---- Sidebar ---- */
+.sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.sidebar-logo{height:60px;display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:1px solid var(--border-light)}
+.sidebar-logo img{width:28px;height:28px}
+.sidebar-logo span{font-size:18px;font-weight:800;letter-spacing:-.3px}
+.sidebar-nav{flex:1;overflow-y:auto;padding:12px 10px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;color:var(--text-2);transition:all .15s;cursor:pointer;margin-bottom:2px}
+.nav-item:hover{background:#F8F9FB;color:var(--text)}
+.nav-item.active{background:var(--green-bg);color:var(--green-dark)}
+.nav-item svg{width:18px;height:18px;flex-shrink:0}
+.nav-item .badge{margin-left:auto;font-size:11px;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--green);color:#fff}
+.sidebar-footer{padding:12px 10px;border-top:1px solid var(--border-light)}
+.sidebar-footer .nav-item{font-size:13px;color:var(--text-3)}
+
+/* ---- Main ---- */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:60px;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;padding:0 24px;flex-shrink:0}
+.search-box{flex:0 0 320px;position:relative}
+.search-box input{width:100%;height:38px;padding:0 12px 0 38px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:#FAFBFC;outline:none}
+.search-box input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(123,193,66,.1)}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-3)}
+.topbar-spacer{flex:1}
+.topbar-info{display:flex;align-items:center;gap:20px}
+.weather-pill{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2)}
+.time-display{font-size:13px;color:var(--text-2);font-weight:500}
+.notif-btn{position:relative;width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--text-3);transition:background .2s}
+.notif-btn:hover{background:#F5F6F8}
+.notif-btn .dot{position:absolute;top:8px;right:8px;width:8px;height:8px;background:var(--red);border-radius:50%;border:2px solid var(--card)}
+.user-chip{display:flex;align-items:center;gap:10px;cursor:pointer}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px}
+.user-name{font-size:13px;font-weight:500}
+.user-role{font-size:11px;color:var(--text-3)}
+.report-btn{height:38px;padding:0 16px;background:var(--green);color:#fff;border-radius:var(--radius-sm);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:background .2s}
+.report-btn:hover{background:var(--green-dark)}
+
+/* ---- Content ---- */
+.content{flex:1;overflow-y:auto;padding:24px}
+.page-title{font-size:22px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.page-title .count-badge{font-size:13px;font-weight:500;color:var(--text-3);background:var(--card);padding:4px 12px;border-radius:20px;border:1px solid var(--border)}
+
+/* ---- KPI Cards ---- */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px;transition:box-shadow .2s}
+.kpi-card:hover{box-shadow:var(--shadow-md)}
+.kpi-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.kpi-icon.dark{background:#1A1D23;color:#fff}
+.kpi-icon.green{background:var(--green-bg);color:var(--green)}
+.kpi-icon img{width:36px;height:36px;border-radius:8px}
+.kpi-label{font-size:13px;color:var(--text-3);font-weight:500}
+.kpi-value{font-size:28px;font-weight:700;letter-spacing:-.5px}
+.kpi-value .unit{font-size:14px;font-weight:500;color:var(--text-3);margin-left:4px}
+.kpi-trend{font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px}
+.kpi-trend.up{color:var(--green)}
+.kpi-trend.down{color:var(--red)}
+
+/* ---- Map Section ---- */
+.map-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;display:grid;grid-template-columns:1fr 280px}
+.map-main{position:relative;padding:20px}
+.map-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.map-header h3{font-size:16px;font-weight:600}
+.map-header .badge{font-size:12px;color:var(--text-3);background:#F5F6F8;padding:4px 10px;border-radius:16px}
+.map-view{position:relative;width:100%;height:400px;border-radius:var(--radius-sm);overflow:hidden;background:linear-gradient(135deg,#E8F5E9 0%,#E3F2FD 100%)}
+.map-view img{width:100%;height:100%;object-fit:cover}
+.map-marker{position:absolute;width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:pointer;transition:transform .2s;z-index:2}
+.map-marker:hover{transform:scale(1.3);z-index:3}
+.map-marker.active{background:var(--green)}
+.map-marker.planned{background:var(--blue)}
+.map-marker.maintenance{background:var(--orange)}
+.map-marker.selected{transform:scale(1.4);box-shadow:0 0 0 6px rgba(123,193,66,.2),0 2px 8px rgba(0,0,0,.2);z-index:3}
+.map-tooltip{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow-lg);z-index:10;min-width:200px;pointer-events:none}
+.map-tooltip .tt-name{font-weight:600;font-size:13px;margin-bottom:4px}
+.map-tooltip .tt-type{font-size:12px;color:var(--text-3);margin-bottom:6px}
+.map-tooltip .tt-val{font-size:14px;font-weight:600;color:var(--green-dark)}
+.map-controls{position:absolute;top:16px;right:16px;display:flex;gap:4px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px;z-index:5}
+.map-controls button{padding:6px 12px;font-size:12px;border-radius:6px;font-weight:500;color:var(--text-3)}
+.map-controls button.active{background:var(--green);color:#fff}
+
+/* ---- Filters Sidebar ---- */
+.filters-panel{border-left:1px solid var(--border-light);padding:20px;display:flex;flex-direction:column;gap:16px}
+.filters-panel h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.filter-select{width:100%;height:38px;padding:0 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:#FAFBFC;outline:none;cursor:pointer}
+.filter-list{display:flex;flex-direction:column;gap:8px}
+.filter-item{display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;padding:8px;border-radius:var(--radius-sm);transition:background .15s}
+.filter-item:hover{background:#F8F9FB}
+.filter-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.filter-item .count{margin-left:auto;font-size:12px;font-weight:600;color:var(--text-3)}
+.filter-item.active{background:var(--green-light)}
+
+/* ---- Bottom Section ---- */
+.bottom-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
+.bottom-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.bottom-card h3{font-size:15px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.bottom-card h3 a{font-size:12px;color:var(--green);font-weight:500}
+
+/* Recent Assets */
+.recent-assets{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px}
+.recent-asset{flex:0 0 160px;border:1px solid var(--border-light);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s}
+.recent-asset:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.recent-asset img{width:100%;height:100px;object-fit:cover;background:#F5F6F8}
+.recent-asset .ra-info{padding:10px}
+.recent-asset .ra-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.recent-asset .ra-type{font-size:11px;color:var(--text-3)}
+.recent-asset .ra-value{font-size:12px;font-weight:600;color:var(--green-dark);margin-top:4px}
+
+/* Donut Chart */
+.donut-wrap{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.donut-chart{position:relative;width:160px;height:160px}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.donut-center .dc-value{font-size:24px;font-weight:700}
+.donut-center .dc-label{font-size:11px;color:var(--text-3)}
+.donut-legend{display:flex;flex-direction:column;gap:6px;width:100%}
+.donut-legend-item{display:flex;align-items:center;gap:8px;font-size:12px}
+.donut-legend-item .dot{width:8px;height:8px;border-radius:50%}
+.donut-legend-item .val{margin-left:auto;font-weight:600}
+
+/* Quick Reminders */
+.reminder-list{display:flex;flex-direction:column;gap:10px}
+.reminder-item{display:flex;gap:10px;padding:10px;border:1px solid var(--border-light);border-radius:var(--radius-sm)}
+.reminder-item .ri-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.reminder-item .ri-icon.green{background:var(--green-bg);color:var(--green)}
+.reminder-item .ri-icon.orange{background:#FFF3E0;color:var(--orange)}
+.reminder-item .ri-icon.blue{background:#E3F2FD;color:var(--blue)}
+.reminder-item .ri-text{font-size:13px;font-weight:500;line-height:1.3}
+.reminder-item .ri-time{font-size:11px;color:var(--text-3);margin-top:2px}
+.reminder-item .ri-badge{font-size:10px;font-weight:600;padding:2px 6px;border-radius:8px;background:#FEF3C7;color:#92400E;margin-left:auto;align-self:flex-start}
+
+/* ============ PAGE: ASSET LIST ============ */
+.toolbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.toolbar .search-box{flex:0 0 280px}
+.toolbar select{height:38px;padding:0 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:var(--card);cursor:pointer;outline:none}
+.toolbar-spacer{flex:1}
+.export-btn{height:38px;padding:0 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:6px;background:var(--card)}
+.new-asset-btn{height:38px;padding:0 16px;background:var(--green);color:#fff;border-radius:var(--radius-sm);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.new-asset-btn:hover{background:var(--green-dark)}
+.asset-table{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.asset-table table{width:100%;border-collapse:collapse}
+.asset-table th{text-align:left;padding:14px 16px;font-size:12px;font-weight:600;color:var(--text-3);border-bottom:1px solid var(--border);background:#FAFBFC;text-transform:uppercase;letter-spacing:.5px}
+.asset-table td{padding:14px 16px;border-bottom:1px solid var(--border-light);font-size:13px}
+.asset-table tr:hover td{background:#F8F9FB}
+.asset-table tr:last-child td{border-bottom:none}
+.asset-thumb{width:48px;height:48px;border-radius:8px;object-fit:cover;background:#F5F6F8}
+.asset-name-cell{display:flex;align-items:center;gap:10px}
+.asset-name-cell .name{font-weight:600}
+.asset-name-cell .id{font-size:11px;color:var(--text-3)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;font-size:12px;font-weight:500}
+.status-badge.active{background:var(--green-bg);color:var(--green-dark)}
+.status-badge.planned{background:#E3F2FD;color:var(--blue)}
+.status-badge.maintenance{background:#FFF3E0;color:var(--orange)}
+.status-badge .dot{width:6px;height:6px;border-radius:50%}
+
+/* ============ PAGE: OBJECT 360 ============ */
+.obj360-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.obj360-header h2{font-size:20px;font-weight:700}
+.obj360-header .obj-id{font-size:13px;color:var(--text-3)}
+.obj360-header .eff-badge{margin-left:auto;padding:6px 14px;background:var(--green);color:#fff;border-radius:20px;font-size:12px;font-weight:600}
+.obj360-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}
+.obj360-visual{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative}
+.obj360-render{width:100%;height:320px;border-radius:var(--radius-sm);overflow:hidden;background:linear-gradient(180deg,#F0F9EB 0%,#E8F5E9 100%);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.obj360-render img{max-width:100%;max-height:100%;object-fit:contain}
+.obj360-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.obj360-kpi{text-align:center;padding:12px;border:1px solid var(--border-light);border-radius:var(--radius-sm)}
+.obj360-kpi .ok-icon{width:32px;height:32px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center}
+.obj360-kpi .ok-icon img{width:28px;height:28px}
+.obj360-kpi .ok-label{font-size:11px;color:var(--text-3);margin-bottom:2px}
+.obj360-kpi .ok-value{font-size:16px;font-weight:700}
+.obj360-tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.obj360-tab{padding:10px 16px;font-size:13px;font-weight:500;color:var(--text-3);border-bottom:2px solid transparent;cursor:pointer}
+.obj360-tab.active{color:var(--green-dark);border-bottom-color:var(--green)}
+.obj360-side{display:flex;flex-direction:column;gap:16px}
+.obj360-gallery{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.obj360-gallery h4{font-size:13px;font-weight:600;margin-bottom:12px}
+.gallery-row{display:flex;gap:8px;overflow-x:auto}
+.gallery-row img{width:80px;height:60px;border-radius:6px;object-fit:cover;background:#F5F6F8}
+.obj360-history{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.obj360-history h4{font-size:13px;font-weight:600;margin-bottom:12px}
+.history-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-light)}
+.history-item:last-child{border-bottom:none}
+.history-item .hi-icon{width:24px;height:24px;border-radius:50%;background:var(--green-bg);color:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.history-item .hi-text{font-size:12px;font-weight:500}
+.history-item .hi-time{font-size:11px;color:var(--text-3)}
+
+/* ============ ERROR STATES ============ */
+.error-page{padding:40px 24px}
+.error-header{text-align:center;margin-bottom:32px}
+.error-header h2{font-size:24px;font-weight:700}
+.error-header p{font-size:14px;color:var(--text-3);margin-top:6px}
+.error-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;max-width:1400px;margin:0 auto}
+.error-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;transition:box-shadow .2s}
+.error-card:hover{box-shadow:var(--shadow-md)}
+.error-card .ec-icon{width:72px;height:72px;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.error-card .ec-icon img{width:64px;height:64px;object-fit:contain}
+.error-card .ec-icon svg{width:48px;height:48px}
+.error-card .ec-title{font-size:14px;font-weight:600}
+.error-card .ec-desc{font-size:12px;color:var(--text-3);line-height:1.4}
+.error-card .ec-btn{margin-top:4px;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:600;transition:background .2s}
+.error-card .ec-btn.green{background:var(--green);color:#fff}
+.error-card .ec-btn.green:hover{background:var(--green-dark)}
+.error-card .ec-btn.red{background:var(--red);color:#fff}
+.error-card .ec-btn.red:hover{background:#DC2626}
+.error-card .ec-progress{width:100%;height:6px;background:#F0F0F4;border-radius:3px;overflow:hidden}
+.error-card .ec-progress-bar{height:100%;background:var(--green);border-radius:3px;transition:width .3s}
+
+/* ============ HIDDEN / SHOW ============ */
+.page{display:none}.page.active{display:block}
+
+/* ============ ANIMATIONS ============ */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.pulse{animation:pulse 2s ease-in-out infinite}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.slide-up{animation:slideUp .3s ease-out}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN PAGE ============ -->
+<div id="loginPage" class="login-page">
+  <div class="login-card slide-up">
+    <div class="login-logo">
+      <img src="https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/662f8b512_generated_image.png" alt="AUGA">
+      <span>AUGA</span>
+    </div>
+    <h1>Tizimga kirish</h1>
+    <p class="sub">Hisobingizga kirish uchun ma'lumotlaringizni kiriting</p>
+    <div class="field-group">
+      <label>Foydalanuvchi nomi yoki email</label>
+      <div class="field-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <input type="text" id="loginUser" placeholder="Foydalanuvchi nomi yoki email" value="admin">
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Parol</label>
+      <div class="field-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input type="password" id="loginPass" placeholder="Parolni kiriting" value="auga2026">
+        <button class="eye-btn" onclick="togglePass()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="login-row">
+      <label class="check-line"><input type="checkbox" checked> Meni eslab qolish</label>
+      <a class="forgot-link" href="#">Parolni unutdingizmi?</a>
+    </div>
+    <button class="login-btn" onclick="doLogin()">
+      Kirish
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <div class="role-section">
+      <div class="role-label">Rol</div>
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="selectRole(this,'rahbar')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Rahbar
+        </button>
+        <button class="role-tab" onclick="selectRole(this,'operator')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Operator
+        </button>
+        <button class="role-tab" onclick="selectRole(this,'texnik')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.82-.33"/></svg>
+          Texnik xodim
+        </button>
+      </div>
+    </div>
+    <p class="demo-note">Demo: parol — auga2026</p>
+  </div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="appMain" class="app" style="display:none">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/662f8b512_generated_image.png" alt="AUGA">
+      <span>AUGA</span>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav"></nav>
+    <div class="sidebar-footer">
+      <div class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Yordam markazi
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Area -->
+  <div class="main">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Qidirish...">
+      </div>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-info">
+        <div class="weather-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+          28°C
+        </div>
+        <div class="time-display mono" id="timeDisplay">14:32</div>
+        <div class="notif-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="dot"></span>
+        </div>
+        <div class="user-chip">
+          <div class="user-avatar">AA</div>
+          <div>
+            <div class="user-name" id="userName">Akmalov A.</div>
+            <div class="user-role" id="userRole">Administrator</div>
+          </div>
+        </div>
+        <button class="report-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          Hisobot yaratish
+        </button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content" id="contentArea"></div>
+  </div>
+</div>
+
+<script>
+// ============ DATA ============
+const IMG = {
+  businessCenter: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/a6463c585_generated_image.png',
+  shoppingMall: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/49a164e69_generated_image.png',
+  government: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/9ea6894da_generated_image.png',
+  residential: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/2d30f413d_generated_image.png',
+  dacha: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/bfcee27f3_generated_image.png',
+  landPlot: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/aa3f99a76_generated_image.png',
+  cityMap: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/cd3c064fb_generated_image.png',
+  greenTower: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/b9207bc55_generated_image.png',
+  buildingSet: 'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/f9371fa6d_generated_image.png',
+};
+
+const NAV_ITEMS = [
+  {label:'Boshqaruv paneli',icon:'dashboard',page:'dashboard'},
+  {label:'Aktivlar',icon:'assets',page:'assets'},
+  {label:'Ko\'chmas mulk',icon:'building',page:'real-estate'},
+  {label:'Lizing',icon:'leasing',page:'leasing'},
+  {label:'Shartnomalar',icon:'contract',page:'contracts'},
+  {label:'Xarajatlar',icon:'expense',page:'expenses'},
+  {label:'Hisobotlar',icon:'report',page:'reports'},
+  {label:'Bildirishnomalar',icon:'bell',page:'notifications',badge:'3'},
+  {label:'Smart Access',icon:'access',page:'access'},
+  {label:'Ma\'lumotlarni saqlash',icon:'storage',page:'storage'},
+  {label:'Audit jurnali',icon:'audit',page:'audit'},
+  {label:'Sozlamalar',icon:'settings',page:'settings'},
+];
+
+const ICONS = {
+  dashboard:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',
+  assets:'<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',
+  building:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/>',
+  leasing:'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>',
+  contract:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/>',
+  expense:'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="8" cy="15" r="1.5"/><circle cx="16" cy="15" r="1.5"/>',
+  report:'<path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>',
+  bell:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',
+  access:'<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>',
+  storage:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',
+  audit:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m4.22-15.22l4.24-4.24M3.54 20.46l4.24-4.24M23 12h-6m-6 0H1m15.22 4.22l4.24 4.24M3.54 3.54l4.24 4.24"/>',
+};
+
+const ASSETS = [
+  {id:1,name:'Green Tower',code:'GT-2024-001',region:'Toshkent sh.',type:'Biznes markazi',typeKey:'biznes',status:'active',value:'12 450 000 000',score:92,img:IMG.businessCenter,area:'18 560 m²',floors:12,year:2021,occupancy:92},
+  {id:2,name:'Mega Mall',code:'MM-2024-002',region:'Toshkent sh.',type:'Savdo markazi',typeKey:'savdo',status:'active',value:'8 300 000 000',score:88,img:IMG.shoppingMall,area:'12 800 m²',floors:5,year:2019,occupancy:85},
+  {id:3,name:'Humo Office',code:'HO-2024-003',region:'Toshkent sh.',type:'Ofis binosi',typeKey:'biznes',status:'active',value:'5 100 000 000',score:78,img:IMG.residential,area:'3 100 m²',floors:8,year:2020,occupancy:76},
+  {id:4,name:'Nurafshon saroy',code:'NS-2024-004',region:'Toshkent vil.',type:'Turar-joy',typeKey:'turar',status:'maintenance',value:'3 700 000 000',score:65,img:IMG.residential,area:'6 500 m²',floors:6,year:2015,occupancy:68},
+  {id:5,name:'Chorvoq dacha',code:'CD-2024-005',region:'Toshkent vil.',type:'Dacha',typeKey:'dacha',status:'planned',value:'1 200 000 000',score:54,img:IMG.dacha,area:'420 m²',floors:2,year:2018,occupancy:0},
+  {id:6,name:'Yashnobod yer',code:'YY-2024-006',region:'Toshkent vil.',type:'Yer maydoni',typeKey:'yer',status:'planned',value:'2 800 000 000',score:45,img:IMG.landPlot,area:'15 000 m²',floors:0,year:0,occupancy:0},
+];
+
+const MAP_MARKERS = [
+  {id:1,name:'Green Tower',x:35,y:30,status:'active',type:'Biznes markazi',value:'12,5 mlrd'},
+  {id:2,name:'Mega Mall',x:55,y:25,status:'active',type:'Savdo markazi',value:'8,3 mlrd'},
+  {id:3,name:'Humo Office',x:28,y:45,status:'active',type:'Ofis binosi',value:'5,1 mlrd'},
+  {id:4,name:'Nurafshon',x:62,y:48,status:'maintenance',type:'Turar-joy',value:'3,7 mlrd'},
+  {id:5,name:'Chorvoq',x:72,y:62,status:'planned',type:'Dacha',value:'1,2 mlrd'},
+  {id:6,name:'Yashnobod',x:18,y:55,status:'planned',type:'Yer maydoni',value:'2,8 mlrd'},
+];
+
+const FILTER_TYPES = [
+  {key:'biznes',label:'Biznes markazi',count:12,color:'#7BC142'},
+  {key:'savdo',label:'Savdo markazi',count:8,color:'#2D7FF9'},
+  {key:'davlat',label:'Davlat muassasasi',count:124,color:'#757575'},
+  {key:'turar',label:'Turar-joy / Ofis',count:36,color:'#E67E22'},
+  {key:'dacha',label:'Dacha',count:72,color:'#10B981'},
+  {key:'yer',label:'Bo\'sh yer maydoni',count:15,color:'#EF4444'},
+];
+
+const ERRORS = [
+  {title:'Sahifa topilmadi',desc:'404 — sahifa mavjud emas yoki o\'chirilgan',btn:'Bosh sahifaga qaytish',btnColor:'green',icon:'404'},
+  {title:'Kamera oflayn',desc:'Kamera ulanishi yo\'qoldi',btn:'Qayta tekshirish',btnColor:'green',icon:'camera'},
+  {title:'Internet aloqasi yo\'q',desc:'Tarmoq bilan bog\'lanishda xatolik',btn:'Qayta tekshirish',btnColor:'green',icon:'wifi'},
+  {title:'Ma\'lumotlar sinxronlanmoqda',desc:'Bino reestr bilan sinxronlash davom etmoqda',progress:67,icon:'sync'},
+  {title:'Yuz mos kelmadi',desc:'Face ID tekshiruvda moslik topilmadi',btn:'Qayta urinib ko\'rish',btnColor:'green',icon:'face'},
+  {title:'Kirish taqiqlangan',desc:'403 — ruxsat berilmagan sahifa',btn:'Bosh sahifaga qaytish',btnColor:'green',icon:'lock'},
+  {title:'Ruxsat yetarli emas',desc:'Sizda bu amalni bajarish uchun huquq yo\'q',btn:'Bosh sahifaga qaytish',btnColor:'green',icon:'shield'},
+  {title:'Yong\'in signali',desc:'Kritik holat! Xavfsizlik tizimiga qo\'ng\'iroq qiling',btn:'Tez yordam chaqirish',btnColor:'red',icon:'fire'},
+  {title:'Hujjatlar topilmadi',desc:'So\'ralgan hujjat mavjud emas',btn:'Hujjat yuklash',btnColor:'green',icon:'doc'},
+  {title:'Tizim texnik xizmatda',desc:'24-may, 16:00 gacha rejalashtirilgan ish',btn:'Batafsil ma\'lumot',btnColor:'green',icon:'wrench'},
+];
+
+// ============ STATE ============
+let currentPage = 'dashboard';
+let selectedRole = 'rahbar';
+let selectedMarkerId = null;
+
+// ============ LOGIN ============
+function togglePass(){const p=document.getElementById('loginPass');p.type=p.type==='password'?'text':'password'}
+function selectRole(el,role){document.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');selectedRole=role;
+  const names={rahbar:'Akmalov A.',operator:'Karimov K.',texnik:'Sodiqov S.'};
+  const roles={rahbar:'Rahbar',operator:'Operator',texnik:'Texnik xodim'};
+  document.getElementById('userName').textContent=names[role];
+  document.getElementById('userRole').textContent=roles[role];
+}
+function doLogin(){
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('appMain').style.display='flex';
+  buildSidebar();
+  navigateTo('dashboard');
+  startTime();
+}
+
+// ============ SIDEBAR ============
+function buildSidebar(){
+  const nav=document.getElementById('sidebarNav');
+  nav.innerHTML=NAV_ITEMS.map(item=>`
+    <div class="nav-item ${item.page==='dashboard'?'active':''}" data-page="${item.page}" onclick="navigateTo('${item.page}')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[item.icon]||''}</svg>
+      <span>${item.label}</span>
+      ${item.badge?`<span class="badge">${item.badge}</span>`:''}
+    </div>
+  `).join('');
+}
+
+function navigateTo(page){
+  currentPage=page;
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===page));
+  const content=document.getElementById('contentArea');
+  content.innerHTML=renderPage(page);
+  content.scrollTop=0;
+  if(page==='dashboard')initMap();
+}
+
+// ============ PAGE RENDERERS ============
+function renderPage(page){
+  switch(page){
+    case'dashboard':return renderDashboard();
+    case'assets':return renderAssets();
+    case'errors':return renderErrors();
+    case'real-estate':return renderAssets();
+    case'leasing':return renderComingSoon('Lizing','Lizing shartnomalari boshqaruvi');
+    case'contracts':return renderComingSoon('Shartnomalar','Shartnomalar ro\'yxati va boshqaruvi');
+    case'expenses':return renderComingSoon('Xarajatlar','Xarajatlar hisoboti');
+    case'reports':return renderComingSoon('Hisobotlar','Tahlil va hisobotlar');
+    case'notifications':return renderComingSoon('Bildirishnomalar','Tizim bildirishnomalari');
+    case'access':return renderComingSoon('Smart Access','Kirish nazorati va Face ID');
+    case'storage':return renderComingSoon('Ma\'lumotlarni saqlash','Ma\'lumotlar arxivi');
+    case'audit':return renderComingSoon('Audit jurnali','Tizim audit loglari');
+    case'settings':return renderComingSoon('Sozlamalar','Tizim sozlamalari');
+    default:return renderDashboard();
+  }
+}
+
+function renderComingSoon(title,desc){
+  return `<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:12px">
+    <img src="${IMG.buildingSet}" style="width:120px;height:120px;opacity:.5">
+    <h2 style="font-size:20px;font-weight:700">${title}</h2>
+    <p style="color:var(--text-3)">${desc}</p>
+  </div>`;
+}
+
+function renderDashboard(){
+  const kpis=[
+    {label:'Jami aktivlar',value:'1 248',unit:'ta',img:IMG.businessCenter,trend:'+8,2%'},
+    {label:"Faol ob'ektlar",value:'1 082',unit:'ta',img:IMG.shoppingMall,trend:'+5,4%'},
+    {label:'Umumiy qiymat',value:'12,7',unit:"trln so'm",img:IMG.government,trend:'+7,6%'},
+    {label:"Ijara daromadi (oy)",value:'58,4',unit:"mln so'm",img:IMG.residential,trend:'+6,1%'},
+  ];
+  return `
+    <div class="slide-up">
+      <h1 class="page-title">Boshqaruv paneli</h1>
+      <div class="kpi-grid">
+        ${kpis.map((k,i)=>`
+          <div class="kpi-card">
+            <div class="kpi-icon ${i%2===0?'dark':'green'}">${i%2===0?'<img src="'+k.img+'" style="border-radius:8px">':'<img src="'+k.img+'" style="border-radius:8px">'}</div>
+            <div class="kpi-label">${k.label}</div>
+            <div class="kpi-value">${k.value}<span class="unit">${k.unit}</span></div>
+            <div class="kpi-trend up">↗ ${k.trend}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="map-section">
+        <div class="map-main">
+          <div class="map-header">
+            <h3>Obyektlar xaritasi</h3>
+            <span class="badge">${MAP_MARKERS.length} obyekt</span>
+          </div>
+          <div class="map-view" id="mapView">
+            <img src="${IMG.cityMap}" alt="3D xarita">
+            <div class="map-controls">
+              <button class="active">3D</button>
+              <button>2D</button>
+            </div>
+            ${MAP_MARKERS.map(m=>`
+              <div class="map-marker ${m.status}${selectedMarkerId===m.id?' selected':''}" 
+                   style="left:${m.x}%;top:${m.y}%"
+                   onclick="selectMarker(${m.id})"
+                   onmouseenter="showTooltip(${m.id},event)"
+                   onmouseleave="hideTooltip()"></div>
+            `).join('')}
+            <div class="map-tooltip" id="mapTooltip" style="display:none"></div>
+          </div>
+        </div>
+        <div class="filters-panel">
+          <h3>Filtrlar</h3>
+          <select class="filter-select">
+            <option>Barcha viloyatlar</option>
+            <option>Toshkent sh.</option>
+            <option>Toshkent vil.</option>
+            <option>Samarqand</option>
+            <option>Buxoro</option>
+            <option>Andijon</option>
+          </select>
+          <div class="filter-list">
+            ${FILTER_TYPES.map(f=>`
+              <div class="filter-item" onclick="toggleFilter(this)">
+                <span class="filter-dot" style="background:${f.color}"></span>
+                <span>${f.label}</span>
+                <span class="count">${f.count}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="bottom-grid">
+        <div class="bottom-card">
+          <h3>So'nggi aktivlar <a href="#" onclick="navigateTo('assets');return false">Barchasi →</a></h3>
+          <div class="recent-assets">
+            ${ASSETS.slice(0,5).map(a=>`
+              <div class="recent-asset" onclick="navigateTo('assets')">
+                <img src="${a.img}" alt="${a.name}">
+                <div class="ra-info">
+                  <div class="ra-name">${a.name}</div>
+                  <div class="ra-type">${a.type}</div>
+                  <div class="ra-value">${a.value}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <div class="bottom-card">
+          <h3>Aktivlar holati</h3>
+          <div class="donut-wrap">
+            <div class="donut-chart">
+              <svg width="160" height="160" viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="64" fill="none" stroke="#F0F0F4" stroke-width="16"/>
+                <circle cx="80" cy="80" r="64" fill="none" stroke="#7BC142" stroke-width="16" stroke-dasharray="402" stroke-dashoffset="145" transform="rotate(-90 80 80)"/>
+                <circle cx="80" cy="80" r="64" fill="none" stroke="#2D7FF9" stroke-width="16" stroke-dasharray="402" stroke-dashoffset="378" transform="rotate(241 80 80)"/>
+                <circle cx="80" cy="80" r="64" fill="none" stroke="#F97316" stroke-width="16" stroke-dasharray="402" stroke-dashoffset="386" transform="rotate(298 80 80)"/>
+              </svg>
+              <div class="donut-center">
+                <div class="dc-value">1 248</div>
+                <div class="dc-label">Jami</div>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="donut-legend-item"><span class="dot" style="background:#7BC142"></span> Faol <span class="val">1 082</span></div>
+              <div class="donut-legend-item"><span class="dot" style="background:#2D7FF9"></span> Rejada <span class="val">166</span></div>
+              <div class="donut-legend-item"><span class="dot" style="background:#F97316"></span> Ta'mirda <span class="val">0</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-card">
+          <h3>Tezkor eslatmalar</h3>
+          <div class="reminder-list">
+            <div class="reminder-item">
+              <div class="ri-icon green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div><div class="ri-text">Green Tower shartnomasi tasdiqlandi</div><div class="ri-time">2 soat oldin</div></div>
+              <span class="ri-badge">Yangi</span>
+            </div>
+            <div class="reminder-item">
+              <div class="ri-icon orange"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <div><div class="ri-text">Nurafshon ta'mir ishlari 3 kundan keyin</div><div class="ri-time">5 soat oldin</div></div>
+            </div>
+            <div class="reminder-item">
+              <div class="ri-icon blue"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div><div class="ri-text">Mega Mall oylik hisobot tayyor</div><div class="ri-time">1 kun oldin</div></div>
+            </div>
+            <div class="reminder-item">
+              <div class="ri-icon green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div><div class="ri-text">Humo Office lizing shartnomasi imzolandi</div><div class="ri-time">2 kun oldin</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderAssets(){
+  return `
+    <div class="slide-up">
+      <h1 class="page-title">Obyektlar ro'yxati <span class="count-badge">${ASSETS.length} obyekt</span></h1>
+      <div class="toolbar">
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="Qidirish...">
+        </div>
+        <select><option>Barcha hududlar</option><option>Toshkent sh.</option><option>Toshkent vil.</option></select>
+        <select><option>Barcha turlar</option><option>Biznes markazi</option><option>Savdo markazi</option><option>Turar-joy</option><option>Dacha</option></select>
+        <select><option>Barcha statuslar</option><option>Faol</option><option>Rejada</option><option>Ta'mirda</option></select>
+        <div class="toolbar-spacer"></div>
+        <button class="export-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Eksport</button>
+        <button class="new-asset-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Yangi obyekt</button>
+      </div>
+      <div class="asset-table">
+        <table>
+          <thead><tr>
+            <th>Obyekt nomi</th><th>Hudud</th><th>Turi</th><th>Status</th><th>Qiymati</th><th>Sifat ball</th>
+          </tr></thead>
+          <tbody>
+            ${ASSETS.map(a=>`
+              <tr onclick="showAssetDetail(${a.id})" style="cursor:pointer">
+                <td><div class="asset-name-cell"><img class="asset-thumb" src="${a.img}"><div><div class="name">${a.name}</div><div class="id">${a.code}</div></div></div></td>
+                <td>${a.region}</td>
+                <td>${a.type}</td>
+                <td><span class="status-badge ${a.status}"><span class="dot" style="background:${a.status==='active'?'#7BC142':a.status==='planned'?'#2D7FF9':'#F97316'}"></span>${a.status==='active'?'Faol':a.status==='planned'?'Rejada':"Ta'mirda"}</span></td>
+                <td class="mono">${a.value}</td>
+                <td><span style="font-weight:600;color:${a.score>=80?'#5FA830':a.score>=60?'#F59E0B':'#EF4444'}">${a.score}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function showAssetDetail(id){
+  const a=ASSETS.find(x=>x.id===id);
+  if(!a)return;
+  const content=document.getElementById('contentArea');
+  content.innerHTML=`
+    <div class="slide-up">
+      <div style="margin-bottom:16px"><button onclick="navigateTo('assets')" style="font-size:13px;color:var(--text-3);display:flex;align-items:center;gap:4px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Orqaga</button></div>
+      <div class="obj360-header">
+        <h2>Obyekt kartasi 360° — ${a.name}</h2>
+        <span class="obj-id mono">${a.code}</span>
+        <span class="eff-badge">A+ Energy</span>
+      </div>
+      <div class="obj360-grid">
+        <div class="obj360-visual">
+          <div class="obj360-render"><img src="${a.img}" alt="${a.name}"></div>
+          <div class="obj360-kpis">
+            <div class="obj360-kpi"><div class="ok-icon"><img src="${IMG.businessCenter}"></div><div class="ok-label">Umumiy maydon</div><div class="ok-value">${a.area}</div></div>
+            <div class="obj360-kpi"><div class="ok-icon"><img src="${IMG.landPlot}"></div><div class="ok-label">Yer maydoni</div><div class="ok-value">${Math.floor(parseInt(a.area.replace(/\D/g,''))/3)} m²</div></div>
+            <div class="obj360-kpi"><div class="ok-icon"><img src="${IMG.residential}"></div><div class="ok-label">Qavat soni</div><div class="ok-value">${a.floors}</div></div>
+            <div class="obj360-kpi"><div class="ok-icon"><img src="${IMG.government}"></div><div class="ok-label">Qurilgan yili</div><div class="ok-value">${a.year||'—'}</div></div>
+          </div>
+          <div class="obj360-tabs" style="margin-top:16px">
+            <div class="obj360-tab active">Umumiy ma'lumot</div>
+            <div class="obj360-tab">Xonalar</div>
+            <div class="obj360-tab">Hujjatlar</div>
+            <div class="obj360-tab">Monitoring</div>
+            <div class="obj360-tab">Tarix</div>
+          </div>
+          <div style="padding:12px 0;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div><span style="font-size:12px;color:var(--text-3)">Bandlik darajasi</span><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="flex:1;height:6px;background:#F0F0F4;border-radius:3px;overflow:hidden"><div style="width:${a.occupancy}%;height:100%;background:var(--green);border-radius:3px"></div></div><span style="font-size:13px;font-weight:600">${a.occupancy}%</span></div></div>
+            <div><span style="font-size:12px;color:var(--text-3)">Texnik holat</span><div style="margin-top:4px;font-size:14px;font-weight:600;color:var(--green-dark)">Yaxshi</div></div>
+          </div>
+        </div>
+        <div class="obj360-side">
+          <div class="obj360-gallery">
+            <h4>Galereya</h4>
+            <div class="gallery-row">
+              <img src="${a.img}"><img src="${IMG.businessCenter}"><img src="${IMG.residential}"><img src="${IMG.government}"><img src="${IMG.shoppingMall}">
+            </div>
+          </div>
+          <div class="obj360-history">
+            <h4>Faoliyat tarixi</h4>
+            <div class="history-item"><div class="hi-icon">✓</div><div><div class="hi-text">Shartnoma imzolandi</div><div class="hi-time">14-may, 10:32</div></div></div>
+            <div class="history-item"><div class="hi-icon">✓</div><div><div class="hi-text">Texnik tekshiruv o'tkazildi</div><div class="hi-time">12-may, 14:15</div></div></div>
+            <div class="history-item"><div class="hi-icon">✓</div><div><div class="hi-text">Bino reestr sinxronlandi</div><div class="hi-time">10-may, 09:00</div></div></div>
+            <div class="history-item"><div class="hi-icon">✓</div><div><div class="hi-text">Kamera o'rnatildi (CAM-01)</div><div class="hi-time">8-may, 16:45</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  content.scrollTop=0;
+}
+
+function renderErrors(){
+  const errorIcons={
+    '404':'<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" rx="2" fill="#F59E0B"/><rect x="26" y="26" width="14" height="14" rx="2" fill="#EF4444"/><text x="24" y="30" font-size="10" fill="#fff" text-anchor="middle">404</text></svg>',
+    camera:'<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="14" width="28" height="20" rx="3" fill="#475569"/><circle cx="20" cy="24" r="6" fill="#94A3B8"/><rect x="34" y="18" width="8" height="12" rx="2" fill="#64748B"/></svg>',
+    wifi:'<svg viewBox="0 0 48 48" fill="none"><path d="M10 20C16 14 32 14 38 20" stroke="#475569" stroke-width="3" stroke-linecap="round"/><path d="M16 27C19 24 29 24 32 27" stroke="#64748B" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="34" r="3" fill="#EF4444"/></svg>',
+    sync:'<svg viewBox="0 0 48 48" fill="none"><path d="M24 10v6m0 16v6M10 24h6m16 0h6" stroke="#7BC142" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="24" r="8" fill="none" stroke="#7BC142" stroke-width="3"/></svg>',
+    face:'<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="7" fill="none" stroke="#475569" stroke-width="3"/><path d="M12 38c0-7 6-12 12-12s12 5 12 12" fill="none" stroke="#475569" stroke-width="3"/><line x1="14" y1="14" x2="34" y2="34" stroke="#EF4444" stroke-width="2"/></svg>',
+    lock:'<svg viewBox="0 0 48 48" fill="none"><rect x="12" y="20" width="24" height="20" rx="3" fill="#475569"/><path d="M16 20v-6a8 8 0 0 1 16 0v6" fill="none" stroke="#475569" stroke-width="3"/><circle cx="24" cy="30" r="3" fill="#94A3B8"/></svg>',
+    shield:'<svg viewBox="0 0 48 48" fill="none"><path d="M24 6L8 12v14c0 10 8 18 16 22 8-4 16-12 16-22V12L24 6z" fill="none" stroke="#475569" stroke-width="3"/><line x1="14" y1="14" x2="34" y2="34" stroke="#EF4444" stroke-width="2"/></svg>',
+    fire:'<svg viewBox="0 0 48 48" fill="none"><path d="M24 6c4 6 8 8 8 14a8 8 0 0 1-16 0c0-3 2-5 4-8 2 2 4 2 4-6z" fill="#EF4444"/><path d="M20 26a4 4 0 0 0 8 0c0-2-2-3-4-5-1 2-4 3-4 5z" fill="#F59E0B"/></svg>',
+    doc:'<svg viewBox="0 0 48 48" fill="none"><rect x="12" y="8" width="24" height="32" rx="2" fill="#475569"/><line x1="16" y1="18" x2="32" y2="18" stroke="#94A3B8" stroke-width="2"/><line x1="16" y1="24" x2="32" y2="24" stroke="#94A3B8" stroke-width="2"/><line x1="16" y1="30" x2="26" y2="30" stroke="#94A3B8" stroke-width="2"/></svg>',
+    wrench:'<svg viewBox="0 0 48 48" fill="none"><path d="M30 10a6 6 0 0 0-8 8L12 28l4 4 10-10a6 6 0 0 0 8-8l-4 4-6-4z" fill="#F59E0B"/></svg>',
+  };
+  return `
+    <div class="error-page slide-up">
+      <div class="error-header">
+        <h2>Xatolik va holatlar</h2>
+        <p>Tizimda yuzaga kelishi mumkin bo'lgan holatlar va ularning ko'rinishi</p>
+      </div>
+      <div class="error-grid">
+        ${ERRORS.map(e=>`
+          <div class="error-card">
+            <div class="ec-icon">${errorIcons[e.icon]||''}</div>
+            <div class="ec-title">${e.title}</div>
+            <div class="ec-desc">${e.desc}</div>
+            ${e.progress?`<div class="ec-progress"><div class="ec-progress-bar" style="width:${e.progress}%"></div></div><div style="font-size:11px;color:var(--text-3)">${e.progress}%</div>`:''}
+            ${e.btn?`<button class="ec-btn ${e.btnColor}">${e.btn}</button>`:''}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ============ MAP INTERACTION ============
+function initMap(){}
+function selectMarker(id){
+  selectedMarkerId=id;
+  const m=MAP_MARKERS.find(x=>x.id===id);
+  if(!m)return;
+  document.querySelectorAll('.map-marker').forEach(el=>el.classList.remove('selected'));
+  // Re-render markers
+  navigateTo('dashboard');
+  selectedMarkerId=id;
+  setTimeout(()=>{
+    const el=document.querySelector(`.map-marker[onclick="selectMarker(${id})"]`);
+    if(el)el.classList.add('selected');
+  },50);
+}
+function showTooltip(id,e){
+  const m=MAP_MARKERS.find(x=>x.id===id);
+  if(!m)return;
+  const tt=document.getElementById('mapTooltip');
+  if(!tt)return;
+  tt.innerHTML=`<div class="tt-name">${m.name}</div><div class="tt-type">${m.type}</div><div class="tt-val">${m.value}</div>`;
+  tt.style.display='block';
+  const rect=e.target.getBoundingClientRect();
+  const parentRect=document.getElementById('mapView').getBoundingClientRect();
+  tt.style.left=(rect.left-parentRect.left+20)+'px';
+  tt.style.top=(rect.top-parentRect.top-10)+'px';
+}
+function hideTooltip(){
+  const tt=document.getElementById('mapTooltip');
+  if(tt)tt.style.display='none';
+}
+function toggleFilter(el){
+  el.classList.toggle('active');
+}
+
+// ============ CLOCK ============
+function startTime(){
+  const update=()=>{
+    const d=new Date();
+    const h=String(d.getHours()).padStart(2,'0');
+    const m=String(d.getMinutes()).padStart(2,'0');
+    const el=document.getElementById('timeDisplay');
+    if(el)el.textContent=`${h}:${m}`;
+  };
+  update();
+  setInterval(update,1000);
+}
+</script>
+</body>
+</html>
