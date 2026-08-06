@@ -6,74 +6,57 @@
 <title>AUGA — Smart Asset Management</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ============ RESET ============ */
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --green:#7BC142;--green-dark:#5FA830;--green-light:#E8F5E9;--green-bg:#F0F9EB;--green-50:#FAFCF7;
-  --bg:#F4F5F7;--card:#FFFFFF;--border:#E8E9EC;--border-light:#F0F1F4;
-  --text:#1A1D23;--text-2:#555A66;--text-3:#8C919D;--text-4:#B0B5BF;
-  --blue:#2D7FF9;--blue-light:#E3F2FD;--orange:#F97316;--orange-light:#FFF3E0;
-  --red:#EF4444;--red-light:#FEF2F2;--yellow:#F59E0B;--yellow-light:#FFFBEB;
-  --purple:#8B5CF6;--purple-light:#F5F3FF;--teal:#14B8A6;--teal-light:#F0FDFA;
-  --radius:12px;--radius-sm:8px;--radius-lg:16px;--radius-xl:20px;
-  --shadow-xs:0 1px 2px rgba(0,0,0,.04);--shadow-sm:0 1px 3px rgba(0,0,0,.06);
-  --shadow:0 2px 8px rgba(0,0,0,.06);--shadow-md:0 4px 20px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 32px rgba(0,0,0,.1);--shadow-xl:0 16px 48px rgba(0,0,0,.12);
-  --sidebar-w:260px;--topbar-h:64px;
-  --transition:all .2s cubic-bezier(.4,0,.2,1);
-}
+:root{--green:#7BC142;--green-dark:#5FA830;--green-light:#E8F5E9;--green-bg:#F0F9EB;--green-50:#FAFCF7;--green-glow:rgba(123,193,66,.15);--green-grad:linear-gradient(135deg,#7BC142 0%,#5FA830 100%);--bg:#F4F5F7;--bg-2:#FAFBFC;--card:#FFFFFF;--border:#E8E9EC;--border-light:#F0F1F4;--text:#1A1D23;--text-2:#555A66;--text-3:#8C919D;--text-4:#B0B5BF;--blue:#2D7FF9;--blue-light:#E3F2FD;--orange:#F97316;--orange-light:#FFF3E0;--red:#EF4444;--red-light:#FEF2F2;--yellow:#F59E0B;--yellow-light:#FFFBEB;--purple:#8B5CF6;--purple-light:#F5F3FF;--teal:#14B8A6;--teal-light:#F0FDFA;--radius:12px;--radius-sm:8px;--radius-lg:16px;--radius-xl:20px;--radius-2xl:28px;--shadow-xs:0 1px 2px rgba(0,0,0,.04);--shadow-sm:0 1px 3px rgba(0,0,0,.06);--shadow:0 2px 8px rgba(0,0,0,.06);--shadow-md:0 4px 20px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.1);--shadow-xl:0 16px 48px rgba(0,0,0,.12);--shadow-green:0 8px 24px rgba(123,193,66,.2);--sidebar-w:260px;--topbar-h:64px;--transition:all .2s cubic-bezier(.4,0,.2,1);--glass:rgba(255,255,255,.7);--glass-border:rgba(255,255,255,.3)}
 html,body{height:100%;font-family:'Onest',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 .mono{font-family:'IBM Plex Mono',monospace}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
 input,select,textarea{font-family:inherit}
 img{max-width:100%;display:block}
-::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#D0D5DB;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#B0B5BF}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#D0D5DB;border-radius:3px}
 .slide-up{animation:slideUp .4s ease}@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn .3s ease}@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .pulse-red{animation:pulseRed 1.5s infinite}@keyframes pulseRed{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
-
-/* ============ LOGIN ============ */
-.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#FAFBFC 0%,#F4F5F7 100%);position:relative;overflow:hidden}
-.login-page::before{content:'';position:absolute;top:-200px;left:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,193,66,.08) 0%,transparent 70%)}
-.login-page::after{content:'';position:absolute;bottom:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,193,66,.08) 0%,transparent 70%)}
-.login-card{position:relative;width:440px;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:44px 40px;box-shadow:0 8px 40px rgba(0,0,0,.08);z:1}
-.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px}
-.login-logo .logo-icon{width:40px;height:40px}
-.login-logo span{font-size:24px;font-weight:800;letter-spacing:-.5px}
-.login-card h1{font-size:26px;font-weight:700;margin-bottom:8px}
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#FAFBFC 0%,#F0F4F8 100%);position:relative;overflow:hidden}
+.login-page::before{content:'';position:absolute;top:-300px;left:-300px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(123,193,66,.06) 0%,transparent 70%)}
+.login-page::after{content:'';position:absolute;bottom:-300px;right:-300px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(45,127,249,.04) 0%,transparent 70%)}
+.login-card{position:relative;width:460px;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.6);border-radius:28px;padding:48px 44px;box-shadow:0 20px 60px rgba(0,0,0,.1),0 0 0 1px rgba(255,255,255,.5) inset;z:1}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.login-logo .logo-icon{width:44px;height:44px;filter:drop-shadow(0 4px 12px rgba(123,193,66,.3))}
+.login-logo span{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.login-card h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
 .login-card .sub{color:var(--text-3);font-size:14px;margin-bottom:28px}
 .field-group{margin-bottom:18px}
 .field-group label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text)}
 .field-wrap{position:relative}
 .field-wrap .icon-left{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}
-.field-wrap input{width:100%;height:48px;padding:0 14px 0 44px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;outline:none;transition:var(--transition);background:#FAFBFC}
+.field-wrap input{width:100%;height:50px;padding:0 14px 0 44px;border:1.5px solid var(--border);border-radius:12px;font-size:14px;outline:none;transition:var(--transition);background:rgba(255,255,255,.6)}
 .field-wrap input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(123,193,66,.12);background:#fff}
 .field-wrap input::placeholder{color:var(--text-4)}
 .eye-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-3);cursor:pointer;padding:4px}
 .login-row{display:flex;justify-content:space-between;align-items:center;margin:20px 0 24px}
 .check-line{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);cursor:pointer}
 .check-line input[type=checkbox]{width:18px;height:18px;accent-color:var(--green);border-radius:4px}
-.forgot-link{font-size:13px;color:var(--green);font-weight:600}
-.login-btn{width:100%;height:48px;background:var(--green);color:#fff;border-radius:10px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:var(--transition);box-shadow:0 4px 12px rgba(123,193,66,.3)}
-.login-btn:hover{background:var(--green-dark);transform:translateY(-1px);box-shadow:0 6px 16px rgba(123,193,66,.4)}
+.forgot-link{font-size:13px;color:var(--green);font-weight:600;transition:var(--transition)}
+.forgot-link:hover{color:var(--green-dark)}
+.login-btn{width:100%;height:50px;background:var(--green-grad);color:#fff;border-radius:12px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:var(--transition);box-shadow:var(--shadow-green)}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(123,193,66,.35)}
 .login-btn:active{transform:translateY(0)}
 .role-section{margin-top:28px;border-top:1px solid var(--border-light);padding-top:24px}
 .role-label{font-size:12px;font-weight:600;color:var(--text-3);margin-bottom:10px;text-align:center;text-transform:uppercase;letter-spacing:.5px}
 .role-tabs{display:flex;gap:10px}
-.role-tab{flex:1;padding:12px 8px;border:1.5px solid var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-2);background:#fff;transition:var(--transition)}
+.role-tab{flex:1;padding:14px 8px;border:1.5px solid var(--border);border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-2);background:rgba(255,255,255,.5);transition:var(--transition);cursor:pointer}
 .role-tab:hover{border-color:var(--green);background:var(--green-50)}
 .role-tab.active{background:var(--green-light);border-color:var(--green);color:var(--green-dark)}
-.role-tab svg{width:20px;height:20px}
+.role-tab svg{width:22px;height:22px}
 .demo-note{text-align:center;margin-top:20px;font-size:12px;color:var(--text-4)}
-
-/* ============ APP LAYOUT ============ */
 .app{display:flex;height:100vh;overflow:hidden}
 .sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;z:10}
 .sidebar-logo{height:var(--topbar-h);display:flex;align-items:center;gap:10px;padding:0 22px;border-bottom:1px solid var(--border-light)}
-.sidebar-logo .logo-icon{width:32px;height:32px}
+.sidebar-logo .logo-icon{width:32px;height:32px;filter:drop-shadow(0 2px 8px rgba(123,193,66,.2))}
 .sidebar-logo span{font-size:19px;font-weight:800;letter-spacing:-.3px}
 .sidebar-nav{flex:1;overflow-y:auto;padding:14px 10px}
 .nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;font-size:14px;font-weight:500;color:var(--text-2);transition:var(--transition);cursor:pointer;margin-bottom:2px;position:relative}
@@ -85,7 +68,7 @@ img{max-width:100%;display:block}
 .sidebar-footer{padding:12px 10px;border-top:1px solid var(--border-light)}
 .sidebar-footer .nav-item{font-size:13px;color:var(--text-3)}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{height:var(--topbar-h);background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;padding:0 24px;flex-shrink:0}
+.topbar{height:var(--topbar-h);background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;padding:0 24px;flex-shrink:0;z:9}
 .search-box{flex:0 0 320px;position:relative}
 .search-box input{width:100%;height:40px;padding:0 12px 0 40px;border:1px solid var(--border);border-radius:10px;font-size:13px;background:#FAFBFC;outline:none;transition:var(--transition)}
 .search-box input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(123,193,66,.1);background:#fff}
@@ -99,468 +82,350 @@ img{max-width:100%;display:block}
 .notif-btn .dot{position:absolute;top:8px;right:8px;width:8px;height:8px;background:var(--red);border-radius:50%;border:2px solid var(--card)}
 .user-chip{display:flex;align-items:center;gap:10px;cursor:pointer;padding:6px;border-radius:10px;transition:var(--transition)}
 .user-chip:hover{background:#F5F6F8}
-.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--green-grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 2px 8px rgba(123,193,66,.3)}
 .user-name{font-size:13px;font-weight:600}
 .user-role{font-size:11px;color:var(--text-3)}
-.report-btn{height:40px;padding:0 18px;background:var(--green);color:#fff;border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;transition:var(--transition);box-shadow:0 2px 8px rgba(123,193,66,.25)}
-.report-btn:hover{background:var(--green-dark);transform:translateY(-1px)}
+.report-btn{height:40px;padding:0 18px;background:var(--green-grad);color:#fff;border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;transition:var(--transition);box-shadow:var(--shadow-green)}
+.report-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(123,193,66,.35)}
 .content{flex:1;overflow-y:auto;padding:24px}
 .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
 .page-title{font-size:24px;font-weight:700;display:flex;align-items:center;gap:10px}
 .page-title .count-badge{font-size:13px;font-weight:600;color:var(--text-3);background:var(--card);padding:4px 12px;border-radius:20px;border:1px solid var(--border)}
 .page-actions{display:flex;align-items:center;gap:10px}
 .btn{height:40px;padding:0 16px;border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;transition:var(--transition);border:1px solid transparent;white-space:nowrap}
-.btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px)}
-.btn-outline{background:var(--card);color:var(--text-2);border-color:var(--border)}.btn-outline:hover{background:#FAFBFC;border-color:var(--text-4)}
-.btn-ghost{background:transparent;color:var(--text-2)}.btn-ghost:hover{background:#F5F6F8}
-.btn-danger{background:var(--red);color:#fff}.btn-danger:hover{background:#DC2626}
-.btn-sm{height:32px;padding:0 12px;font-size:12px}
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:var(--transition);cursor:pointer}
-.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:var(--text-4)}
-.kpi-top{display:flex;align-items:flex-start;justify-content:space-between}
-.kpi-icon{width:44px;height:44px;border-radius:12px;overflow:hidden}
-.kpi-icon img{width:100%;height:100%;object-fit:cover}
-.kpi-label{font-size:13px;color:var(--text-3);font-weight:500}
-.kpi-value{font-size:28px;font-weight:800;letter-spacing:-.5px;display:flex;align-items:baseline;gap:4px}
-.kpi-value .unit{font-size:13px;font-weight:500;color:var(--text-3)}
-.kpi-trend{font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px}
-.kpi-trend.up{color:var(--green)}
-.kpi-trend.down{color:var(--red)}
-.map-section{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px;display:grid;grid-template-columns:1fr 300px}
-.map-main{position:relative;padding:20px}
-.map-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.map-header h3{font-size:16px;font-weight:700}
-.map-header .badge{font-size:12px;color:var(--text-3);background:#F5F6F8;padding:4px 12px;border-radius:20px}
-.map-toggle{display:flex;background:#F5F6F8;border-radius:8px;padding:2px}
-.map-toggle button{padding:6px 12px;font-size:12px;font-weight:600;border-radius:6px;color:var(--text-3);transition:var(--transition)}
-.map-toggle button.active{background:var(--card);color:var(--text);box-shadow:var(--shadow-xs)}
-.map-view{position:relative;width:100%;height:380px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#E8F5E9 0%,#E3F2FD 100%)}
-.map-view img{width:100%;height:100%;object-fit:cover}
-.map-marker{position:absolute;width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer;transition:var(--transition);z-index:2}
-.map-marker:hover{transform:scale(1.4);z-index:3}
-.map-marker.active{width:18px;height:18px;z-index:4}
-.map-marker.active::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid currentColor;opacity:.3}
-.map-tooltip{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow-md);font-size:13px;z-index:5;min-width:180px;pointer-events:none}
-.map-tooltip h4{font-size:13px;font-weight:700;margin-bottom:4px}
-.map-tooltip .meta{font-size:11px;color:var(--text-3);margin-bottom:2px}
-.map-tooltip .val{font-size:15px;font-weight:700;color:var(--green-dark)}
-.map-side{padding:20px;background:#FAFBFC;border-left:1px solid var(--border)}
-.map-side h3{font-size:14px;font-weight:700;margin-bottom:16px}
-.filter-select{width:100%;height:40px;padding:0 12px;border:1px solid var(--border);border-radius:10px;font-size:13px;background:var(--card);outline:none;margin-bottom:16px}
-.filter-list{display:flex;flex-direction:column;gap:10px}
-.filter-item{display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;padding:8px 10px;border-radius:8px;transition:var(--transition)}
-.filter-item:hover{background:#F0F1F4}
-.filter-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.filter-count{margin-left:auto;font-weight:600;color:var(--text-3);font-size:12px}
-.filter-item.active{background:var(--card);box-shadow:var(--shadow-xs)}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.section-header h3{font-size:16px;font-weight:700}
-.section-header .link{font-size:13px;color:var(--green);font-weight:600;cursor:pointer}
-.obj-carousel{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;margin-bottom:24px}
-.obj-carousel::-webkit-scrollbar{height:4px}
-.obj-card{flex:0 0 240px;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:var(--transition);cursor:pointer}
-.obj-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--text-4)}
-.obj-card-img{width:100%;height:140px;overflow:hidden;background:#F5F6F8}
-.obj-card-img img{width:100%;height:100%;object-fit:cover}
-.obj-card-body{padding:14px}
-.obj-card-name{font-size:14px;font-weight:700;margin-bottom:4px}
-.obj-card-type{font-size:12px;color:var(--text-3);margin-bottom:8px}
-.obj-card-value{font-size:16px;font-weight:700;color:var(--green-dark)}
-.obj-card-value .unit{font-size:11px;font-weight:500;color:var(--text-3)}
-.donut-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
-.donut-section h3{font-size:14px;font-weight:700;margin-bottom:16px}
-.donut-wrap{display:flex;align-items:center;gap:20px}
-.donut-chart{width:140px;height:140px;position:relative;flex-shrink:0}
-.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.donut-center .num{font-size:24px;font-weight:800}
-.donut-center .lbl{font-size:11px;color:var(--text-3)}
-.donut-legend{flex:1;display:flex;flex-direction:column;gap:10px}
-.donut-legend-item{display:flex;align-items:center;gap:10px;font-size:13px}
-.donut-legend-item .dot{width:10px;height:10px;border-radius:50%}
-.donut-legend-item .count{margin-left:auto;font-weight:700;color:var(--text-3)}
-.alert-list{display:flex;flex-direction:column;gap:10px}
-.alert-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;font-size:13px;transition:var(--transition);cursor:pointer}
-.alert-item:hover{transform:translateX(4px)}
-.alert-item.critical{background:var(--red-light);border:1px solid rgba(239,68,68,.2)}
-.alert-item.warning{background:var(--yellow-light);border:1px solid rgba(245,158,11,.2)}
-.alert-item.info{background:var(--blue-light);border:1px solid rgba(45,127,249,.15)}
-.alert-item.success{background:var(--green-bg);border:1px solid rgba(123,193,66,.2)}
-.alert-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.alert-item.critical .alert-icon{background:rgba(239,68,68,.15);color:var(--red)}
-.alert-item.warning .alert-icon{background:rgba(245,158,11,.15);color:var(--yellow)}
-.alert-item.info .alert-icon{background:rgba(45,127,249,.15);color:var(--blue)}
-.alert-item.success .alert-icon{background:rgba(123,193,66,.15);color:var(--green)}
-.alert-text{flex:1}
-.alert-text .title{font-weight:600}
-.alert-text .time{font-size:11px;color:var(--text-3)}
-.table-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.table-toolbar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border-light)}
-.table-toolbar .left{display:flex;align-items:center;gap:12px}
-.table-toolbar h3{font-size:15px;font-weight:700}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
-thead th{text-align:left;padding:12px 16px;font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border-light);white-space:nowrap}
-tbody td{padding:14px 16px;font-size:13px;border-bottom:1px solid var(--border-light)}
-tbody tr{transition:var(--transition)}
-tbody tr:hover{background:#FAFBFC}
-tbody tr:last-child td{border-bottom:none}
-.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
-.status-badge.active{background:var(--green-bg);color:var(--green-dark)}
-.status-badge.maintenance{background:var(--yellow-light);color:var(--yellow)}
-.status-badge.planned{background:var(--blue-light);color:var(--blue)}
-.status-badge.offline{background:var(--red-light);color:var(--red)}
-.status-badge.expiring{background:var(--orange-light);color:var(--orange)}
-.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
-.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:20px}
-.tab{padding:10px 16px;font-size:14px;font-weight:600;color:var(--text-3);cursor:pointer;border-bottom:2px solid transparent;transition:var(--transition)}
+.btn-primary{background:var(--green-grad);color:#fff;box-shadow:var(--shadow-green)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(123,193,66,.35)}
+.btn-outline{background:var(--card);border-color:var(--border);color:var(--text-2)}.btn-outline:hover{border-color:var(--green);color:var(--green-dark)}
+.btn-sm{height:34px;padding:0 14px;font-size:12px}
+.btn-danger{background:var(--red);color:#fff}.btn-danger:hover{opacity:.9}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition)}
+.card-hover:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.status-badge .status-dot{width:6px;height:6px;border-radius:50%}
+.status-badge.active{background:var(--green-bg);color:var(--green-dark)}.status-badge.active .status-dot{background:var(--green)}
+.status-badge.maintenance{background:var(--orange-light);color:var(--orange)}.status-badge.maintenance .status-dot{background:var(--orange)}
+.status-badge.planned{background:var(--blue-light);color:var(--blue)}.status-badge.planned .status-dot{background:var(--blue)}
+.status-badge.offline{background:var(--red-light);color:var(--red)}.status-badge.offline .status-dot{background:var(--red)}
+.tab-bar{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text-3);border-bottom:2px solid transparent;transition:var(--transition);cursor:pointer}
 .tab:hover{color:var(--text)}
-.tab.active{color:var(--green-dark);border-bottom-color:var(--green)}
-.detail-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
-.detail-title{font-size:24px;font-weight:700;margin-bottom:4px}
-.detail-subtitle{font-size:14px;color:var(--text-3)}
-.breadcrumb{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-3);margin-bottom:12px}
-.breadcrumb a{color:var(--green);font-weight:500;cursor:pointer}
-.breadcrumb a:hover{text-decoration:underline}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
-.detail-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
-.detail-card h4{font-size:13px;font-weight:600;color:var(--text-3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
-.detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-light);font-size:13px}
-.detail-row:last-child{border-bottom:none}
-.detail-row .label{color:var(--text-3)}
-.detail-row .val{font-weight:600}
-.health-gauge{width:120px;height:120px;margin:0 auto 12px;position:relative}
-.health-score{font-size:32px;font-weight:800;text-align:center}
-.health-label{font-size:12px;color:var(--text-3);text-align:center}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
-.progress-bar{height:8px;background:#F0F1F4;border-radius:4px;overflow:hidden}
-.progress-fill{height:100%;border-radius:4px;transition:width .5s ease}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:100;animation:fadeIn .2s ease}
-.modal{background:var(--card);border-radius:16px;padding:28px;width:90%;max-width:480px;box-shadow:var(--shadow-xl);animation:slideUp .3s ease}
-.modal h3{font-size:18px;font-weight:700;margin-bottom:8px}
-.modal p{color:var(--text-3);font-size:14px;margin-bottom:20px}
-.modal-actions{display:flex;gap:10px;justify-content:flex-end}
-.error-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center}
-.error-code{font-size:72px;font-weight:800;color:var(--text-4);margin-bottom:8px}
-.error-title{font-size:24px;font-weight:700;margin-bottom:8px}
-.error-desc{font-size:14px;color:var(--text-3);margin-bottom:24px}
-.contract-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;transition:var(--transition)}
-.contract-card:hover{box-shadow:var(--shadow)}
+.tab.active{color:var(--green-dark);border-color:var(--green)}
+.filter-dropdown{height:38px;padding:0 14px;border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text-2);background:var(--card);cursor:pointer;display:flex;align-items:center;gap:8px;transition:var(--transition)}
+.filter-dropdown:hover{border-color:var(--green)}
+.section-title{font-size:18px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.section-title a{font-size:13px;color:var(--green);font-weight:600;transition:var(--transition)}
+.section-title a:hover{color:var(--green-dark)}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:var(--transition);position:relative;overflow:hidden}
+.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.kpi-icon svg{width:22px;height:22px}
+.kpi-icon.green{background:var(--green-bg);color:var(--green)}
+.kpi-icon.blue{background:var(--blue-light);color:var(--blue)}
+.kpi-icon.orange{background:var(--orange-light);color:var(--orange)}
+.kpi-icon.purple{background:var(--purple-light);color:var(--purple)}
+.kpi-label{font-size:13px;color:var(--text-3);margin-bottom:6px;font-weight:500}
+.kpi-value{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.kpi-trend{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600}
+.kpi-trend.up{color:var(--green)}.kpi-trend.down{color:var(--red)}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);z:100;animation:slideUp .3s ease}
+.toggle{width:44px;height:24px;background:#E0E0E0;border-radius:12px;position:relative;cursor:pointer;transition:var(--transition)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:var(--transition);box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.toggle.on{background:var(--green)}.toggle.on::after{left:23px}
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{text-align:left;padding:12px 16px;font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.data-table td{padding:14px 16px;font-size:13px;border-bottom:1px solid var(--border-light)}
+.data-table tr{transition:var(--transition)}.data-table tr:hover{background:#FAFBFC}
+.data-table tr:last-child td{border-bottom:none}
+.progress-bar{height:6px;background:#F0F1F4;border-radius:3px;overflow:hidden}
+.progress-bar .fill{height:100%;border-radius:3px;transition:width .6s ease}
+.map-container{position:relative;width:100%;height:400px;border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(135deg,#F0F4F8 0%,#E8F0E8 100%)}
+.map-container img{width:100%;height:100%;object-fit:cover}
+.map-marker{position:absolute;width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer;transition:var(--transition);z:2}
+.map-marker:hover{transform:rotate(-45deg) scale(1.2);z:5}
+.map-marker .label{position:absolute;top:100%;left:50%;transform:translateX(-50%) rotate(45deg);white-space:nowrap;font-size:11px;font-weight:600;background:var(--card);padding:4px 10px;border-radius:6px;box-shadow:var(--shadow);margin-top:6px;opacity:0;transition:var(--transition);pointer-events:none}
+.map-marker:hover .label{opacity:1}
+.map-mode-toggle{position:absolute;top:16px;right:16px;display:flex;gap:4px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);padding:4px;border-radius:10px;z:3}
+.map-mode-toggle button{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;color:var(--text-3);transition:var(--transition)}
+.map-mode-toggle button.active{background:var(--green);color:#fff}
+.map-info{position:absolute;bottom:16px;left:16px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);padding:12px 16px;border-radius:12px;z:3}
+.dash-grid{display:grid;gap:20px}
+.dash-kpis{grid-template-columns:repeat(4,1fr)}
+.dash-main{display:grid;grid-template-columns:1fr 340px;gap:20px}
+.dash-bottom{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:1200px){.dash-kpis{grid-template-columns:repeat(2,1fr)}.dash-main{grid-template-columns:1fr}}
+.asset-carousel{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.asset-carousel::-webkit-scrollbar{height:4px}
+.asset-card{flex:0 0 280px;scroll-snap-align:start;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);cursor:pointer}
+.asset-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.asset-card img{width:100%;height:160px;object-fit:cover}
+.asset-card-body{padding:16px}
+.asset-card-body h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.asset-card-body .type{font-size:12px;color:var(--text-3);margin-bottom:10px}
+.asset-card-body .price{font-size:18px;font-weight:800;color:var(--green-dark)}
+.donut-container{display:flex;align-items:center;gap:24px}
+.donut-chart{width:160px;height:160px;position:relative;flex-shrink:0}
+.donut-chart svg{transform:rotate(-90deg)}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.donut-center .total{font-size:28px;font-weight:800}
+.donut-center .label{font-size:11px;color:var(--text-3)}
+.donut-legend{flex:1}
+.donut-legend-item{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:13px}
+.donut-legend-item .dot{width:10px;height:10px;border-radius:50%}
+.donut-legend-item .val{margin-left:auto;font-weight:700;font-family:'IBM Plex Mono',monospace}
+.alert-item{display:flex;align-items:start;gap:12px;padding:14px;border-radius:12px;border:1px solid var(--border);background:var(--card);transition:var(--transition);margin-bottom:8px}
+.alert-item:hover{box-shadow:var(--shadow-sm)}
+.alert-item.critical{border-color:var(--red);background:var(--red-light)}
+.alert-item.warning{border-color:var(--yellow);background:var(--yellow-light)}
+.alert-item.info{border-color:var(--blue);background:var(--blue-light)}
+.alert-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.alert-icon.critical{background:var(--red);color:#fff}
+.alert-icon.warning{background:var(--yellow);color:#fff}
+.alert-icon.info{background:var(--blue);color:#fff}
+.alert-body h5{font-size:13px;font-weight:700;margin-bottom:2px}
+.alert-body p{font-size:12px;color:var(--text-3)}
+.alert-time{font-size:11px;color:var(--text-4);margin-left:auto;white-space:nowrap}
+.contract-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:var(--transition);margin-bottom:12px}
+.contract-card:hover{box-shadow:var(--shadow-md)}
 .contract-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.contract-number{font-size:16px;font-weight:700}
-.contract-parties{display:flex;align-items:center;gap:16px;margin-bottom:16px}
-.contract-party{flex:1;padding:12px;background:#FAFBFC;border-radius:10px}
-.contract-party .role{font-size:11px;color:var(--text-3);text-transform:uppercase;margin-bottom:4px}
-.contract-party .name{font-size:13px;font-weight:600}
-.payment-timeline{display:flex;align-items:center;gap:4px;margin-top:12px}
-.payment-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
-.payment-dot.done{background:var(--green);color:#fff}
-.payment-dot.pending{background:var(--yellow-light);color:var(--yellow);border:2px solid var(--yellow)}
-.payment-dot.future{background:#F0F1F4;color:var(--text-4)}
-.payment-line{flex:1;height:2px;background:#F0F1F4}
-.payment-line.done{background:var(--green)}
-.storage-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
-.storage-bar{height:12px;background:#F0F1F4;border-radius:6px;overflow:hidden;margin:12px 0}
-.storage-bar .fill{height:100%;border-radius:6px}
-.settings-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:16px}
-.settings-section h3{font-size:16px;font-weight:700;margin-bottom:16px}
+.contract-info h4{font-size:16px;font-weight:700;margin-bottom:4px}
+.contract-info .code{font-size:12px;color:var(--text-3);font-family:'IBM Plex Mono',monospace}
+.contract-amount{font-size:20px;font-weight:800;color:var(--green-dark);text-align:right}
+.contract-amount .period{font-size:12px;color:var(--text-3);font-weight:400}
+.payment-timeline{display:flex;gap:4px;margin-top:16px}
+.payment-step{flex:1;height:6px;border-radius:3px;background:#F0F1F4;transition:var(--transition)}
+.payment-step.paid{background:var(--green)}
+.payment-step.pending{background:var(--yellow)}
+.payment-step.overdue{background:var(--red)}
+.payment-labels{display:flex;gap:4px;margin-top:8px}
+.payment-labels span{flex:1;font-size:10px;color:var(--text-4);text-align:center}
+.expense-chart{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;align-items:end;height:200px}
+.expense-bar{background:var(--green-grad);border-radius:6px 6px 0 0;transition:var(--transition);min-height:4px;position:relative}
+.expense-bar:hover{opacity:.8;transform:scaleY(1.05)}
+.expense-bar .tip{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:4px 8px;border-radius:6px;font-size:11px;white-space:nowrap;opacity:0;transition:var(--transition);pointer-events:none}
+.expense-bar:hover .tip{opacity:1;margin-bottom:4px}
+.expense-labels{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:8px}
+.expense-labels span{text-align:center;font-size:11px;color:var(--text-4)}
+.access-sim{max-width:600px;margin:0 auto}
+.face-scan{width:200px;height:200px;margin:0 auto 24px;position:relative;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#1A1D23,#2D7FF9)}
+.face-scan::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green);box-shadow:0 0 12px var(--green);animation:scanLine 2s infinite}
+@keyframes scanLine{0%{top:0}100%{top:100%}}
+.face-scan .scan-text{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;font-weight:600;text-align:center}
+.access-step{display:flex;align-items:center;gap:12px;padding:16px;border-radius:12px;border:1px solid var(--border);background:var(--card);margin-bottom:8px;transition:var(--transition)}
+.access-step.active{border-color:var(--green);background:var(--green-50)}
+.access-step.done{border-color:var(--green);background:var(--green-bg)}
+.access-step-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#F0F1F4;color:var(--text-3)}
+.access-step.done .access-step-icon{background:var(--green);color:#fff}
+.access-step.active .access-step-icon{background:var(--green-light);color:var(--green-dark)}
+.access-step h5{font-size:13px;font-weight:700}
+.access-step p{font-size:12px;color:var(--text-3)}
+.audit-entry{display:flex;align-items:start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-light)}
+.audit-entry:last-child{border-bottom:none}
+.audit-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.audit-body{flex:1}
+.audit-body h5{font-size:13px;font-weight:600;margin-bottom:2px}
+.audit-body p{font-size:12px;color:var(--text-3)}
+.audit-time{font-size:11px;color:var(--text-4);white-space:nowrap}
+.settings-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px}
+.settings-section h3{font-size:16px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-light)}
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border-light)}
 .setting-row:last-child{border-bottom:none}
-.setting-info .title{font-size:14px;font-weight:600}
-.setting-info .desc{font-size:12px;color:var(--text-3);margin-top:2px}
-.toggle{width:44px;height:24px;border-radius:12px;background:#D0D5DB;position:relative;cursor:pointer;transition:var(--transition)}
-.toggle.on{background:var(--green)}
-.toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:var(--transition);box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.toggle.on::after{transform:translateX(20px)}
-.access-panel{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.access-header{padding:20px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between}
-.camera-feed{width:100%;height:300px;background:#1A1D23;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.camera-feed img{width:100%;height:100%;object-fit:cover;opacity:.8}
-.scan-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.scan-frame{width:160px;height:200px;border:3px solid var(--green);border-radius:12px;position:relative}
-.scan-line{position:absolute;left:0;right:0;height:2px;background:var(--green);animation:scanMove 2s infinite linear}
-@keyframes scanMove{0%{top:0}100%{top:100%}}
-.access-info{padding:20px}
-.access-btn-group{display:flex;gap:10px;margin-top:16px}
-.notif-list{display:flex;flex-direction:column;gap:8px}
-.notif-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:var(--transition);cursor:pointer}
-.notif-item:hover{box-shadow:var(--shadow-sm);border-color:var(--text-4)}
-.notif-item.unread{border-left:3px solid var(--green)}
-.notif-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.notif-content{flex:1}
-.notif-content .title{font-size:14px;font-weight:600;margin-bottom:2px}
-.notif-content .desc{font-size:13px;color:var(--text-3)}
-.notif-content .time{font-size:11px;color:var(--text-4);margin-top:4px}
-.audit-entry{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-light)}
-.audit-time{font-size:12px;color:var(--text-3);font-family:'IBM Plex Mono',monospace;width:100px;flex-shrink:0}
-.audit-action{font-size:13px}
-.audit-action .user{font-weight:600}
-.audit-action .action{color:var(--text-3)}
-.audit-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-left:8px}
-.audit-tag.create{background:var(--green-bg);color:var(--green-dark)}
-.audit-tag.update{background:var(--blue-light);color:var(--blue)}
-.audit-tag.delete{background:var(--red-light);color:var(--red)}
-.audit-tag.login{background:var(--purple-light);color:var(--purple)}
-.expense-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
-.expense-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border-light)}
-.expense-row:last-child{border-bottom:none}
-.expense-cat{display:flex;align-items:center;gap:10px}
-.expense-cat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center}
-.expense-amount{font-size:16px;font-weight:700}
-.expense-pct{font-size:12px;color:var(--text-3)}
-.report-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:var(--transition);cursor:pointer}
-.report-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.report-card .icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.report-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
-.report-card p{font-size:12px;color:var(--text-3)}
-.leasing-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;transition:var(--transition)}
-.leasing-card:hover{box-shadow:var(--shadow)}
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center}
-.empty-icon{width:80px;height:80px;margin-bottom:16px;opacity:.3}
-.empty-title{font-size:18px;font-weight:700;margin-bottom:8px}
-.empty-desc{font-size:14px;color:var(--text-3);margin-bottom:20px}
-.stat-row{display:flex;align-items:center;gap:16px;margin-bottom:16px}
-.stat-mini{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
-.stat-mini .val{font-size:22px;font-weight:800;color:var(--text)}
-.stat-mini .lbl{font-size:11px;color:var(--text-3);margin-top:4px}
-.chart-bar{display:flex;align-items:flex-end;gap:8px;height:180px;padding:12px 0}
-.chart-bar-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
-.chart-bar-fill{width:100%;border-radius:6px 6px 0 0;transition:height .5s ease}
-.chart-bar-label{font-size:11px;color:var(--text-3)}
-@media(max-width:1200px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.map-section{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr 1fr}.two-col,.three-col{grid-template-columns:1fr}}
-@media(max-width:768px){.sidebar{display:none}.search-box{display:none}.kpi-grid{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}}
+.setting-info .title{font-size:14px;font-weight:600;margin-bottom:2px}
+.setting-info .desc{font-size:12px;color:var(--text-3)}
+.error-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.error-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-align:center;transition:var(--transition)}
+.error-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.error-card .error-icon{width:56px;height:56px;margin:0 auto 16px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800}
+.error-card h4{font-size:16px;font-weight:700;margin-bottom:6px}
+.error-card p{font-size:13px;color:var(--text-3);margin-bottom:16px}
 </style>
 </head>
 <body>
 <div id="loginPage" class="login-page">
-<div class="login-card slide-up">
-<div class="login-logo">
-<svg class="logo-icon" viewBox="0 0 40 40"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7BC142"/><stop offset="100%" stop-color="#5FA830"/></linearGradient></defs><path d="M20 4 L34 12 L34 28 L20 36 L6 28 L6 12 Z" fill="url(#lg)"/><path d="M20 4 L34 12 L20 20 L6 12 Z" fill="rgba(255,255,255,0.15)"/><text x="20" y="25" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="14">A</text></svg>
-<span>AUGA</span>
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/191d73816_generated_image.png" class="logo-icon" alt="AUGA">
+      <span>AUGA</span>
+    </div>
+    <h1>Tizimga kirish</h1>
+    <p class="sub">Hisobingizga kirish uchun ma'lumotlaringizni kiriting</p>
+    <div class="field-group">
+      <label>Foydalanuvchi nomi yoki email</label>
+      <div class="field-wrap">
+        <svg class="icon-left" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+        <input type="text" placeholder="admin@auga.uz" value="admin">
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Parol</label>
+      <div class="field-wrap">
+        <svg class="icon-left" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input type="password" id="loginPass" placeholder="........" value="augа2026">
+        <span class="eye-btn" onclick="togglePass()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+      </div>
+    </div>
+    <div class="login-row">
+      <label class="check-line"><input type="checkbox" checked> Meni eslab qolish</label>
+      <a href="javascript:void(0)" class="forgot-link">Parolni unutdingizmi?</a>
+    </div>
+    <button class="login-btn" onclick="doLogin()">Kirish <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    <div class="role-section">
+      <div class="role-label">Rol tanlang</div>
+      <div class="role-tabs">
+        <div class="role-tab active" onclick="selectRole(this,'rahbar')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>Rahbar</div>
+        <div class="role-tab" onclick="selectRole(this,'operator')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a3 3 0 0 0-3 3v2a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 21v-2a7 7 0 0 0-14 0v2"/></svg>Operator</div>
+        <div class="role-tab" onclick="selectRole(this,'texnik')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Texnik</div>
+      </div>
+    </div>
+    <p class="demo-note">Demo: parol — auga2026</p>
+  </div>
 </div>
-<h1>Tizimga kirish</h1>
-<p class="sub">Hisobingizga kirish uchun ma'lumotlaringizni kiriting</p>
-<div class="field-group"><label>Foydalanuvchi nomi yoki email</label><div class="field-wrap"><svg class="icon-left" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg><input type="text" id="loginUser" value="admin" placeholder="Foydalanuvchi nomi yoki email"></div></div>
-<div class="field-group"><label>Parol</label><div class="field-wrap"><svg class="icon-left" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><input type="password" id="loginPass" value="auga2026" placeholder="Parolni kiriting"><button class="eye-btn" onclick="togglePass()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
-<div class="login-row"><label class="check-line"><input type="checkbox" checked> Meni eslab qolish</label><a class="forgot-link" onclick="showToast('Parolni tiklash funksiyasi')">Parolni unutdingizmi?</a></div>
-<button class="login-btn" onclick="doLogin()">Kirish<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-<div class="role-section"><div class="role-label">Rolni tanlang</div><div class="role-tabs">
-<div class="role-tab active" onclick="selectRole(this,'rahbar')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 11l2 2 4-4"/></svg>Rahbar</div>
-<div class="role-tab" onclick="selectRole(this,'operator')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="12" cy="12" r="10" stroke-dasharray="2 2"/></svg>Operator</div>
-<div class="role-tab" onclick="selectRole(this,'texnik')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M14 7l3 3M17 7l-3 3"/></svg>Texnik xodim</div>
-</div></div>
-<div class="demo-note">Demo: parol — auga2026</div>
-</div></div>
-
 <div id="appMain" class="app" style="display:none">
-<aside class="sidebar">
-<div class="sidebar-logo"><svg class="logo-icon" viewBox="0 0 40 40"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7BC142"/><stop offset="100%" stop-color="#5FA830"/></linearGradient></defs><path d="M20 4 L34 12 L34 28 L20 36 L6 28 L6 12 Z" fill="url(#lg2)"/><path d="M20 4 L34 12 L20 20 L6 12 Z" fill="rgba(255,255,255,0.15)"/><text x="20" y="25" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="14">A</text></svg><span>AUGA</span></div>
-<nav class="sidebar-nav" id="sidebarNav"></nav>
-<div class="sidebar-footer"><div class="nav-item" onclick="showToast('Yordam markazi: +998 71 200 00 00')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Yordam markazi</div></div>
-</aside>
-<div class="main">
-<header class="topbar">
-<div class="search-box"><svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Qidirish..." onkeydown="if(event.key==='Enter')showToast('Qidiruv: '+this.value)"></div>
-<div class="topbar-spacer"></div>
-<div class="topbar-info">
-<div class="weather-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>28°C</div>
-<div class="time-display" id="timeDisplay">--:--</div>
-<button class="notif-btn" onclick="navigateTo('notifications')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot"></span></button>
-<div class="user-chip" onclick="navigateTo('settings')"><div class="user-avatar" id="userAvatar">AA</div><div><div class="user-name" id="userName">Akmalov A.</div><div class="user-role" id="userRole">Rahbar</div></div></div>
-<button class="report-btn" onclick="navigateTo('reports')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>Hisobot yaratish</button>
-</div></header>
-<main class="content" id="contentArea"></main>
-</div></div>
-
-<div id="toast" style="position:fixed;bottom:24px;right:24px;background:#1A1D23;color:#fff;padding:14px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:200;opacity:0;transform:translateY(20px);transition:all .3s ease;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.2)"></div>
-
+  <aside class="sidebar">
+    <div class="sidebar-logo"><img src="https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/191d73816_generated_image.png" class="logo-icon" alt="AUGA"><span>AUGA</span></div>
+    <nav class="sidebar-nav" id="sidebarNav"></nav>
+    <div class="sidebar-footer"><div class="nav-item" onclick="showToast('Yordam markazi: +998 71 200 00 00')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>Yordam markazi</span></div></div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="search-box"><svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" placeholder="Qidirish..."></div>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-info">
+        <div class="weather-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>28°C</div>
+        <div class="time-display" id="timeDisplay">09:00</div>
+        <div class="notif-btn" onclick="navigateTo('notifications')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot"></span></div>
+        <div class="user-chip"><div class="user-avatar" id="userAvatar">AA</div><div><div class="user-name" id="userName">Akmalov A.</div><div class="user-role" id="userRole">Rahbar</div></div></div>
+        <button class="report-btn" onclick="showToast('Hisobot yaratilmoqda...')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Hisobot yaratish</button>
+      </div>
+    </header>
+    <div class="content" id="contentArea"></div>
+  </div>
+</div>
 <script>
-const IMG={businessCenter:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/f645ad1f4_generated_image.png',shoppingMall:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/d0daaaeff_generated_image.png',government:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/045e584c0_generated_image.png',cityAerial:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/b92a7686c_generated_image.png',residential:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/cd3b039e5_generated_image.png',dacha:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/276cc0b55_generated_image.png',landPlot:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/7d7079677_generated_image.png',office:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/944cd1922_generated_image.png'};
-const ICONS={dashboard:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',assets:'<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',building:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/>',leasing:'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>',contract:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/>',expense:'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="8" cy="15" r="1.5"/><circle cx="16" cy="15" r="1.5"/>',report:'<path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>',bell:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',access:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',storage:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',audit:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',settings:'<circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m4.22-15.22l4.24-4.24M3.54 20.46l4.24-4.24M23 12h-6m-6 0H1m15.22 4.22l4.24 4.24M3.54 3.54l4.24 4.24"/>'};
+const IMG={businessCenter:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/850b1f001_generated_image.png',shoppingMall:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/eb7d4b953_generated_image.png',government:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/7b9f835b9_generated_image.png',residential:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/685fba6f5_generated_image.png',dacha:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/0c8aba8de_generated_image.png',cityMap:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/f87218524_generated_image.png',logo:'https://media.base44.com/images/public/6a684216927a7b0ea9fbf6e9/191d73816_generated_image.png'};
 const NAV_ITEMS=[{label:'Boshqaruv paneli',icon:'dashboard',page:'dashboard'},{label:'Aktivlar',icon:'assets',page:'assets'},{label:"Ko'chmas mulk",icon:'building',page:'real-estate'},{label:'Lizing',icon:'leasing',page:'leasing'},{label:'Shartnomalar',icon:'contract',page:'contracts'},{label:'Xarajatlar',icon:'expense',page:'expenses'},{label:'Hisobotlar',icon:'report',page:'reports'},{label:'Bildirishnomalar',icon:'bell',page:'notifications',badge:'3'},{label:'Smart Access',icon:'access',page:'access'},{label:"Ma'lumotlarni saqlash",icon:'storage',page:'storage'},{label:'Audit jurnali',icon:'audit',page:'audit'},{label:'Sozlamalar',icon:'settings',page:'settings'}];
-const ASSETS=[{id:1,name:'Green Tower',code:'GT-2024-001',region:'Toshkent sh.',type:'Biznes markazi',typeKey:'biznes',status:'active',value:'12 450 000 000',valueShort:'12,5 mlrd',score:92,img:IMG.businessCenter,area:'18 560 m²',floors:12,year:2021,occupancy:92,address:"Toshkent sh., Mirzo Ulug'bek t., Sayilgoh 7",rooms:156,rent:'125 000 so\'m/m²'},{id:2,name:'Mega Mall',code:'MM-2024-002',region:'Toshkent sh.',type:'Savdo markazi',typeKey:'savdo',status:'active',value:'8 300 000 000',valueShort:'8,3 mlrd',score:88,img:IMG.shoppingMall,area:'12 800 m²',floors:5,year:2019,occupancy:85,address:'Toshkent sh., Yunusobod t., Amir Temur 15',rooms:89,rent:'95 000 so\'m/m²'},{id:3,name:'Humo Office',code:'HO-2024-003',region:'Toshkent sh.',type:'Ofis binosi',typeKey:'biznes',status:'active',value:'5 100 000 000',valueShort:'5,1 mlrd',score:78,img:IMG.office,area:'3 100 m²',floors:8,year:2020,occupancy:76,address:"Toshkent sh., Yashnobod t., Farg'ona 24",rooms:64,rent:'80 000 so\'m/m²'},{id:4,name:'Nurafshon saroy',code:'NS-2024-004',region:'Toshkent vil.',type:'Turar-joy',typeKey:'turar',status:'maintenance',value:'3 700 000 000',valueShort:'3,7 mlrd',score:65,img:IMG.residential,area:'6 500 m²',floors:6,year:2015,occupancy:68,address:'Toshkent vil., Qibray t., Guliston 12',rooms:72,rent:'45 000 so\'m/m²'},{id:5,name:'Chorvoq dacha',code:'CD-2024-005',region:'Toshkent vil.',type:'Dacha',typeKey:'dacha',status:'planned',value:'1 200 000 000',valueShort:'1,2 mlrd',score:54,img:IMG.dacha,area:'420 m²',floors:2,year:2018,occupancy:0,address:"Toshkent vil., Bo'stonliq t., Chorvoq 3",rooms:8,rent:'—'},{id:6,name:'Yashnobod yer',code:'YY-2024-006',region:'Toshkent vil.',type:'Yer maydoni',typeKey:'yer',status:'planned',value:'2 800 000 000',valueShort:'2,8 mlrd',score:45,img:IMG.landPlot,area:'15 000 m²',floors:0,year:0,occupancy:0,address:'Toshkent vil., Zangiota t., Yangi hayot 1',rooms:0,rent:'—'}];
+const ICONS={dashboard:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',assets:'<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',building:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/>',leasing:'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>',contract:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/>',expense:'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="8" cy="15" r="1.5"/><circle cx="16" cy="15" r="1.5"/>',report:'<path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>',bell:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',access:'<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>',storage:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',audit:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',settings:'<circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m4.22-15.22l4.24-4.24M3.54 20.46l4.24-4.24M23 12h-6m-6 0H1m15.22 4.22l4.24 4.24M3.54 3.54l4.24 4.24"/>'};
+const ASSETS=[{id:1,name:'Green Tower',code:'GT-2024-001',region:'Toshkent sh.',type:'Biznes markazi',typeKey:'biznes',status:'active',value:'12 450 000 000',score:92,img:IMG.businessCenter,area:'18 560 m2',floors:12,year:2021,occupancy:92},{id:2,name:'Mega Mall',code:'MM-2024-002',region:'Toshkent sh.',type:'Savdo markazi',typeKey:'savdo',status:'active',value:'8 300 000 000',score:88,img:IMG.shoppingMall,area:'12 800 m2',floors:5,year:2019,occupancy:85},{id:3,name:'Humo Office',code:'HO-2024-003',region:'Toshkent sh.',type:'Ofis binosi',typeKey:'biznes',status:'active',value:'5 100 000 000',score:78,img:IMG.businessCenter,area:'3 100 m2',floors:8,year:2020,occupancy:76},{id:4,name:'Nurafshon saroy',code:'NS-2024-004',region:'Toshkent vil.',type:'Turar-joy',typeKey:'turar',status:'maintenance',value:'3 700 000 000',score:65,img:IMG.residential,area:'6 500 m2',floors:6,year:2015,occupancy:68},{id:5,name:'Chorvoq dacha',code:'CD-2024-005',region:'Toshkent vil.',type:'Dacha',typeKey:'dacha',status:'planned',value:'1 200 000 000',score:54,img:IMG.dacha,area:'420 m2',floors:2,year:2018,occupancy:0},{id:6,name:'Yashnobod yer',code:'YY-2024-006',region:'Toshkent vil.',type:'Yer maydoni',typeKey:'yer',status:'planned',value:'2 800 000 000',score:45,img:IMG.government,area:'15 000 m2',floors:0,year:0,occupancy:0}];
 const MAP_MARKERS=[{id:1,name:'Green Tower',x:35,y:30,status:'active',type:'Biznes markazi',value:'12,5 mlrd'},{id:2,name:'Mega Mall',x:55,y:25,status:'active',type:'Savdo markazi',value:'8,3 mlrd'},{id:3,name:'Humo Office',x:28,y:45,status:'active',type:'Ofis binosi',value:'5,1 mlrd'},{id:4,name:'Nurafshon',x:62,y:48,status:'maintenance',type:'Turar-joy',value:'3,7 mlrd'},{id:5,name:'Chorvoq',x:72,y:62,status:'planned',type:'Dacha',value:'1,2 mlrd'},{id:6,name:'Yashnobod',x:18,y:55,status:'planned',type:'Yer maydoni',value:'2,8 mlrd'}];
 const FILTER_TYPES=[{key:'biznes',label:'Biznes markazi',count:12,color:'#7BC142'},{key:'savdo',label:'Savdo markazi',count:8,color:'#2D7FF9'},{key:'davlat',label:'Davlat muassasasi',count:124,color:'#757575'},{key:'turar',label:'Turar-joy / Ofis',count:36,color:'#E67E22'},{key:'dacha',label:'Dacha',count:72,color:'#10B981'},{key:'yer',label:"Bo'sh yer maydoni",count:15,color:'#EF4444'}];
-const CONTRACTS=[{id:'SH-2024-001',asset:'Green Tower',tenant:'Uztelecom JSC',period:'01.01.2024 — 31.12.2026',monthly:'125 000 000',status:'active',payments:12,total:24,manager:'Karimov B.'},{id:'SH-2024-002',asset:'Mega Mall',tenant:'Korzinka Markets',period:'15.03.2024 — 15.03.2025',monthly:'89 000 000',status:'active',payments:5,total:12,manager:'Ahmedov R.'},{id:'SH-2024-003',asset:'Humo Office',tenant:'IT Park Uzbekistan',period:'01.06.2024 — 01.06.2027',monthly:'45 000 000',status:'active',payments:2,total:36,manager:'Karimov B.'},{id:'SH-2023-088',asset:'Nurafshon saroy',tenant:'Eco Service LLC',period:'01.09.2023 — 31.08.2025',monthly:'28 000 000',status:'expiring',payments:18,total:24,manager:'Sodiqov D.'},{id:'SH-2024-004',asset:'Green Tower',tenant:'Beeline Uzbekistan',period:'01.04.2024 — 01.04.2029',monthly:'92 000 000',status:'active',payments:4,total:60,manager:'Karimov B.'}];
-const NOTIFICATIONS=[{type:'critical',title:"Yong'in signali — Green Tower",desc:"12-qavatda dud sensori aniqladi. Xodimlarni evakuatsiya qiling.",time:'2 daqiqa oldin'},{type:'warning',title:"Nurafshon saroy — ta'mir ishlari",desc:"Bino ta'miri 67% tugatildi. 2 hafta qoldi.",time:'1 soat oldin'},{type:'info',title:'Yangi shartnoma tasdiqlandi',desc:'SH-2024-004: Beeline Uzbekistan — Green Tower',time:'3 soat oldin'},{type:'success',title:'Bino reestr sinxronlash tugadi',desc:"248 ta yangi obyekt qo'shildi. Jami: 1 248 ta.",time:'5 soat oldin'},{type:'info',title:"Kamera CAM-12 holati o'zgartirildi",desc:"Texnik xodim Sodiqov S. kamerani 'onlayn' holatga o'tkazdi.",time:'1 kun oldin'},{type:'warning',title:'Shartnoma muddati tugayapti',desc:'SH-2023-088: Eco Service LLC — 60 kun qoldi.',time:'1 kun oldin'}];
-const AUDIT_LOG=[{time:'14:32:05',user:'Akmalov A.',action:'tizimga kirdi',tag:'login'},{time:'14:28:12',user:'Karimov B.',action:'yangi shartnoma yaratdi: SH-2024-004',tag:'create'},{time:'14:15:33',user:'Sodiqov S.',action:'kamera CAM-12 holatini yangiladi',tag:'update'},{time:'13:48:21',user:'Akmalov A.',action:"Nurafshon saroy ma'lumotlarini tahrirladi",tag:'update'},{time:'12:30:15',user:'Tizim',action:'Bino reestr sinxronlash amalga oshirildi',tag:'update'},{time:'11:20:08',user:'Karimov B.',action:"Chorvoq dacha rasmini o'chirildi",tag:'delete'},{time:'10:05:42',user:'Akmalov A.',action:'tizimga kirdi',tag:'login'},{time:'09:15:30',user:'Sodiqov S.',action:"yangi kamera qo'shdi: CAM-15",tag:'create'}];
-const ALERTS=[{type:'critical',title:"Yong'in signali",desc:'Green Tower, 12-qavat',time:'2 daqiqa'},{type:'warning',title:'Kamera oflayn',desc:'CAM-12 — Nurafshon saroy',time:'15 daqiqa'},{type:'info',title:'Yangi shartnoma',desc:'SH-2024-004 tasdiqlandi',time:'1 soat'},{type:'success',title:'Sinxronlash tugadi',desc:'248 yangi obyekt qo\'shildi',time:'5 soat'}];
-const EXPENSES=[{cat:"Ta'mir va saqlash",amount:'245 000 000',pct:35,color:'var(--blue)',icon:'wrench'},{cat:'Kommunal xarajatlar',amount:'189 000 000',pct:27,color:'var(--orange)',icon:'home'},{cat:'Xodimlar maoshi',amount:'156 000 000',pct:22,color:'var(--green)',icon:'users'},{cat:'Texnik xizmat',amount:'68 000 000',pct:10,color:'var(--purple)',icon:'shield'},{cat:'Boshqaruv xarajatlari',amount:'42 000 000',pct:6,color:'var(--teal)',icon:'file'}];
+const ALERTS=[{type:'critical',title:"Yong'in signali",desc:'Nurafshon saroy, 3-qavat',time:'2 min avval'},{type:'warning',title:'Kamera oflayn',desc:"Mega Mall - CAM-12 ulanishi yo'qoldi",time:'15 min avval'},{type:'warning',title:'Sinxronlash xatosi',desc:'Bino reestr API javob bermadi',time:'1 soat avval'},{type:'info',title:'Yangi shartnoma',desc:'Green Tower - 12 oylik lizing tasdiqlandi',time:'2 soat avval'},{type:'info',title:'Texnik xizmat rejalashtirildi',desc:'Humo Office - 15-avgust',time:'3 soat avval'}];
+const CONTRACTS=[{id:1,name:'Green Tower - Office Lease',code:'CNT-2024-001',tenant:'RSG Group LLC',amount:'125 000 000',period:'/oy',status:'active',payments:12,paid:8},{id:2,name:'Mega Mall - Retail Space',code:'CNT-2024-002',tenant:'Korzinka Trade',amount:'89 000 000',period:'/oy',status:'active',payments:12,paid:10},{id:3,name:'Humo Office - Co-working',code:'CNT-2024-003',tenant:'WorkSpace Hub',amount:'45 000 000',period:'/oy',status:'active',payments:6,paid:3},{id:4,name:'Nurafshon - Residential',code:'CNT-2024-004',tenant:'Individual tenants',amount:'28 000 000',period:'/oy',status:'pending',payments:12,paid:2}];
+const EXPENSES=[{month:'Yan',amount:42},{month:'Fev',amount:38},{month:'Mar',amount:55},{month:'Apr',amount:48},{month:'May',amount:62},{month:'Iyn',amount:71},{month:'Iyl',amount:68},{month:'Avg',amount:75},{month:'Sen',amount:52},{month:'Okt',amount:58},{month:'Noy',amount:65},{month:'Dek',amount:78}];
+const EXPENSE_CATS=[{label:'Texnik xizmat',amount:'142 mln',color:'#7BC142',pct:35},{label:'Kommunal xizmatlar',amount:'98 mln',color:'#2D7FF9',pct:24},{label:'Xavfsizlik',amount:'65 mln',color:'#F97316',pct:16},{label:"Sug'urta",amount:'52 mln',color:'#8B5CF6',pct:13},{label:'Boshqaruv',amount:'48 mln',color:'#14B8A6',pct:12}];
 let currentPage='dashboard',selectedRole='rahbar',selectedMarkerId=null,activeFilter=null;
-
 function togglePass(){const p=document.getElementById('loginPass');p.type=p.type==='password'?'text':'password'}
-function selectRole(el,role){document.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');selectedRole=role;const names={rahbar:'Akmalov A.',operator:'Karimov K.',texnik:'Sodiqov S.'};const roles={rahbar:'Rahbar',operator:'Operator',texnik:'Texnik xodim'};const inits={rahbar:'AA',operator:'KK',texnik:'SS'};document.getElementById('userName').textContent=names[role];document.getElementById('userRole').textContent=roles[role];document.getElementById('userAvatar').textContent=inits[role]}
-function doLogin(){document.getElementById('loginPage').style.display='none';document.getElementById('appMain').style.display='flex';buildSidebar();navigateTo('dashboard');startTime()}
-function buildSidebar(){const nav=document.getElementById('sidebarNav');nav.innerHTML=NAV_ITEMS.map(item=>`<div class="nav-item ${item.page==='dashboard'?'active':''}" data-page="${item.page}" onclick="navigateTo('${item.page}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[item.icon]||''}</svg><span>${item.label}</span>${item.badge?`<span class="badge">${item.badge}</span>`:''}</div>`).join('')}
-function navigateTo(page){currentPage=page;document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===page));const c=document.getElementById('contentArea');c.innerHTML=renderPage(page);c.scrollTop=0;if(page==='dashboard')setTimeout(initMap,50)}
-function renderPage(page){const pages={dashboard:renderDashboard,assets:renderAssets,'real-estate':renderAssets,leasing:renderLeasing,contracts:renderContracts,expenses:renderExpenses,reports:renderReports,notifications:renderNotifications,access:renderAccess,storage:renderStorage,audit:renderAudit,settings:renderSettings};return(pages[page]||renderDashboard)()}
-function startTime(){function upd(){const d=new Date();const h=String(d.getHours()).padStart(2,'0');const m=String(d.getMinutes()).padStart(2,'0');const el=document.getElementById('timeDisplay');if(el)el.textContent=h+':'+m}
-upd();setInterval(upd,30000)}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateY(0)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(20px)'},2500)}
-function svgIcon(name,w,h){return`<svg width="${w||18}" height="${h||18}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]||''}</svg>`}
-
+function selectRole(el,role){document.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');selectedRole=role;const names={rahbar:'Akmalov A.',operator:'Karimov K.',texnik:'Sodiqov S.'};const roles={rahbar:'Rahbar',operator:'Operator',texnik:'Texnik xodim'};const avatars={rahbar:'AA',operator:'KK',texnik:'SS'};document.getElementById('userName').textContent=names[role];document.getElementById('userRole').textContent=roles[role];document.getElementById('userAvatar').textContent=avatars[role];}
+function doLogin(){document.getElementById('loginPage').style.display='none';document.getElementById('appMain').style.display='flex';buildSidebar();navigateTo('dashboard');startTime();}
+function buildSidebar(){const nav=document.getElementById('sidebarNav');nav.innerHTML=NAV_ITEMS.map(item=>'<div class="nav-item '+(item.page==='dashboard'?'active':'')+'" data-page="'+item.page+'" onclick="navigateTo(\''+item.page+'\')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[item.icon]||'')+'</svg><span>'+item.label+'</span>'+(item.badge?'<span class="badge">'+item.badge+'</span>':'')+'</div>').join('');}
+function navigateTo(page){currentPage=page;document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===page));const content=document.getElementById('contentArea');content.innerHTML=renderPage(page);content.scrollTop=0;if(page==='dashboard')setTimeout(initMap,50);}
+function renderPage(page){const pages={dashboard:renderDashboard,assets:renderAssets,'real-estate':renderAssets,leasing:renderLeasing,contracts:renderContracts,expenses:renderExpenses,reports:renderReports,notifications:renderNotifications,access:renderAccess,storage:renderStorage,audit:renderAudit,settings:renderSettings,errors:renderErrors};return(pages[page]||renderDashboard)();}
+function renderKPI(label,value,unit,trend,color,icon){return '<div class="kpi-card"><div class="kpi-icon '+color+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+icon+'</svg></div><div class="kpi-label">'+label+'</div><div class="kpi-value">'+value+(unit?' <span style="font-size:14px;font-weight:500;color:var(--text-3)">'+unit+'</span>':'')+'</div><div class="kpi-trend '+(trend==='up'?'up':'down')+'">'+(trend==='up'?'↑':'↓')+' '+unit+'</div></div>';}
 function renderDashboard(){
-const kpis=[
-{label:'Jami aktivlar',value:'1 248',unit:'ta',img:IMG.businessCenter,trend:'+8,2%'},
-{label:"Faol ob'ektlar",value:'1 082',unit:'ta',img:IMG.shoppingMall,trend:'+5,4%'},
-{label:"Umumiy qiymat",value:'12,7',unit:"trln so'm",img:IMG.government,trend:'+7,6%'},
-{label:"Ijara daromadi (oy)",value:'58,4',unit:"mln so'm",img:IMG.residential,trend:'+6,1%'},
-];
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Boshqaruv paneli</div><div class="page-actions"><button class="btn btn-outline" onclick="showToast('Eksport: PDF')">Eksport</button><button class="btn btn-primary" onclick="navigateTo('reports')">Hisobot yaratish</button></div></div>
-<div class="kpi-grid">${kpis.map(k=>`<div class="kpi-card" onclick="navigateTo('assets')"><div class="kpi-top"><div class="kpi-icon"><img src="${k.img}" alt=""></div></div><div class="kpi-label">${k.label}</div><div class="kpi-value">${k.value}<span class="unit">${k.unit}</span></div><div class="kpi-trend up">↑ ${k.trend}</div></div>`).join('')}</div>
-<div class="map-section"><div class="map-main"><div class="map-header"><h3>Obyektlar xaritasi</h3><div style="display:flex;gap:12px;align-items:center"><span class="badge">6 obyekt</span><div class="map-toggle"><button class="active" onclick="showToast('3D rejim')">3D</button><button onclick="showToast('2D rejim')">2D</button></div></div></div><div class="map-view" id="mapView"><img src="${IMG.cityAerial}" alt="Map">${MAP_MARKERS.map(m=>{const colors={active:'#7BC142',maintenance:'#F59E0B',planned:'#2D7FF9'};return `<div class="map-marker" style="left:${m.x}%;top:${m.y}%;background:${colors[m.status]}" onclick="selectMarker(${m.id})" data-id="${m.id}"></div>`}).join('')}</div></div><div class="map-side"><h3>Filtrlar</h3><select class="filter-select" onchange="showToast('Viloyat: '+this.value)"><option>Barcha viloyatlar</option><option>Toshkent sh.</option><option>Toshkent vil.</option><option>Samarqand</option><option>Buxoro</option><option>Andijon</option></select><div class="filter-list">${FILTER_TYPES.map(f=>`<div class="filter-item ${activeFilter===f.key?'active':''}" onclick="toggleFilter('${f.key}')"><span class="filter-dot" style="background:${f.color}"></span>${f.label}<span class="filter-count">${f.count}</span></div>`).join('')}</div></div></div>
-<div class="section-header"><h3>So'nggi aktivlar</h3><span class="link" onclick="navigateTo('assets')">Barchasi →</span></div>
-<div class="obj-carousel">${ASSETS.map(a=>`<div class="obj-card" onclick="openDetail(${a.id})"><div class="obj-card-img"><img src="${a.img}" alt="${a.name}"></div><div class="obj-card-body"><div class="obj-card-name">${a.name}</div><div class="obj-card-type">${a.type}</div><div class="obj-card-value">${a.valueShort}<span class="unit"> so'm</span></div></div></div>`).join('')}</div>
-<div class="two-col"><div class="donut-section"><h3>Aktivlar holati</h3><div class="donut-wrap"><div class="donut-chart"><svg width="140" height="140" viewBox="0 0 140 140"><circle cx="70" cy="70" r="56" fill="none" stroke="#F0F1F4" stroke-width="14"/><circle cx="70" cy="70" r="56" fill="none" stroke="#7BC142" stroke-width="14" stroke-dasharray="286 352" stroke-dashoffset="0" transform="rotate(-90 70 70)" stroke-linecap="round"/><circle cx="70" cy="70" r="56" fill="none" stroke="#2D7FF9" stroke-width="14" stroke-dasharray="52 352" stroke-dashoffset="-286" transform="rotate(-90 70 70)" stroke-linecap="round"/><circle cx="70" cy="70" r="56" fill="none" stroke="#F59E0B" stroke-width="14" stroke-dasharray="44 352" stroke-dashoffset="-338" transform="rotate(-90 70 70)" stroke-linecap="round"/></svg><div class="donut-center"><div class="num">1248</div><div class="lbl">Jami</div></div></div><div class="donut-legend"><div class="donut-legend-item"><span class="dot" style="background:#7BC142"></span>Faol<span class="count">1082</span></div><div class="donut-legend-item"><span class="dot" style="background:#2D7FF9"></span>Rejada<span class="count">98</span></div><div class="donut-legend-item"><span class="dot" style="background:#F59E0B"></span>Ta'mirda<span class="count">68</span></div></div></div></div>
-<div class="donut-section"><h3>Oxirgi bildirishnomalar</h3><div class="alert-list">${ALERTS.map(a=>{const icons={critical:'alert',warning:'alert',info:'bell',success:'check'};return `<div class="alert-item ${a.type}" onclick="navigateTo('notifications')"><div class="alert-icon">${svgIcon(icons[a.type]||'bell',16,16)}</div><div class="alert-text"><div class="title">${a.title}</div><div class="desc">${a.desc}</div><div class="time">${a.time} oldin</div></div></div>`}).join('')}</div></div></div>
-</div>`}
-
-function selectMarker(id){selectedMarkerId=id;document.querySelectorAll('.map-marker').forEach(m=>m.classList.toggle('active',parseInt(m.dataset.id)===id));const m=MAP_MARKERS.find(x=>x.id===id);if(m){showToast(m.name+' — '+m.value);openDetail(id)}}
-function toggleFilter(key){activeFilter=activeFilter===key?null:key;renderPage('dashboard');setTimeout(()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page==='dashboard'));initMap()},10)}
-function initMap(){/* map already rendered inline */}
-
+return '<div class="fade-in">'+
+'<div class="page-header"><div class="page-title">Boshqaruv paneli <span class="count-badge">6 obyekt</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Eksport...\')">Eksport</button><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi obyekt\')">+ Yangi obyekt</button></div></div>'+
+'<div class="dash-grid dash-kpis" style="margin-bottom:20px">'+
+renderKPI('Jami aktivlar','1 248 ta','+8,2%','up','green','<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>')+
+renderKPI("Faol ob'ektlar",'1 082 ta','+5,4%','up','blue','<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/>')+
+renderKPI('Umumiy qiymat','12,7 trln',"so'm",'+7,6%','up','orange','<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>')+
+renderKPI('Ijara daromadi (oy)','58,4 mln',"so'm",'+6,1%','up','purple','<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>')+
+'</div>'+
+'<div class="dash-main" style="margin-bottom:20px">'+
+'<div class="card" style="padding:20px"><div class="section-title">Obyektlar xaritasi <span style="font-size:12px;color:var(--text-3);font-weight:500">6 obyekt</span></div><div class="map-container" id="mapContainer"><img src="'+IMG.cityMap+'" alt="City Map"><div class="map-mode-toggle"><button class="active" onclick="showToast(\'3D rejim\')">3D</button><button onclick="showToast(\'2D rejim\')">2D</button></div><div class="map-info"><div style="font-size:13px;font-weight:700;margin-bottom:4px">Toshkent viloyati</div><div style="font-size:12px;color:var(--text-3)">6 ta faol obyekt - 12,7 trln so\'m</div></div></div></div>'+
+'<div class="card" style="padding:20px"><div class="section-title">Filtrlar</div><select class="filter-dropdown" style="width:100%;margin-bottom:16px" onchange="showToast(\'Filtrlash...\')"><option>Barcha viloyatlar</option><option>Toshkent sh.</option><option>Toshkent vil.</option></select>'+
+FILTER_TYPES.map(f=>'<div style="display:flex;align-items:center;gap:10px;padding:10px 0;cursor:pointer;border-bottom:1px solid var(--border-light)" onclick="toggleFilter(\''+f.key+'\')"><span style="width:10px;height:10px;border-radius:50%;background:'+f.color+'"></span><span style="font-size:13px">'+f.label+'</span><span style="margin-left:auto;font-size:13px;font-weight:600;color:var(--text-3)">'+f.count+'</span></div>').join('')+
+'</div></div>'+
+'<div class="card" style="padding:20px;margin-bottom:20px"><div class="section-title">So\'nggi aktivlar <a href="javascript:navigateTo(\'assets\')">Barchasi →</a></div><div class="asset-carousel">'+
+ASSETS.map(a=>'<div class="asset-card" onclick="navigateTo(\'assets\')"><img src="'+a.img+'" alt="'+a.name+'"><div class="asset-card-body"><h4>'+a.name+'</h4><div class="type">'+a.type+'</div><div class="price">'+a.value+' so\'m</div></div></div>').join('')+
+'</div></div>'+
+'<div class="dash-bottom">'+
+'<div class="card" style="padding:20px"><div class="section-title">Aktivlar holati</div><div class="donut-container"><div class="donut-chart"><svg width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="60" fill="none" stroke="#F0F1F4" stroke-width="20"/><circle cx="80" cy="80" r="60" fill="none" stroke="#7BC142" stroke-width="20" stroke-dasharray="188 377" stroke-linecap="round"/><circle cx="80" cy="80" r="60" fill="none" stroke="#2D7FF9" stroke-width="20" stroke-dasharray="75 377" stroke-dashoffset="-188" stroke-linecap="round"/><circle cx="80" cy="80" r="60" fill="none" stroke="#F97316" stroke-width="20" stroke-dasharray="113 377" stroke-dashoffset="-263" stroke-linecap="round"/></svg><div class="donut-center"><div class="total">6</div><div class="label">Jami</div></div></div><div class="donut-legend"><div class="donut-legend-item"><span class="dot" style="background:#7BC142"></span> Faol <span class="val">3</span></div><div class="donut-legend-item"><span class="dot" style="background:#2D7FF9"></span> Rejada <span class="val">2</span></div><div class="donut-legend-item"><span class="dot" style="background:#F97316"></span> Ta\'mirda <span class="val">1</span></div></div></div></div>'+
+'<div class="card" style="padding:20px"><div class="section-title">So\'nggi ogohlantirishlar <a href="javascript:navigateTo(\'notifications\')">Barchasi →</a></div>'+
+ALERTS.slice(0,4).map(a=>'<div class="alert-item '+a.type+'"><div class="alert-icon '+a.type+'">'+(a.type==='critical'?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>':a.type==='warning'?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>')+'</div><div class="alert-body"><h5>'+a.title+'</h5><p>'+a.desc+'</p></div><span class="alert-time">'+a.time+'</span></div>').join('')+
+'</div></div></div>';
+}
 function renderAssets(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Aktivlar <span class="count-badge">1 248 ta</span></div><div class="page-actions"><button class="btn btn-outline" onclick="showToast('Filtr')">Filtr</button><button class="btn btn-primary" onclick="showToast('Yangi aktiv')">+ Yangi aktiv</button></div></div>
-<div class="tabs"><div class="tab active">Barchasi</div><div class="tab" onclick="showToast('Faol aktivlar')">Faol</div><div class="tab" onclick="showToast('Ta\\'mirda')">Ta'mirda</div><div class="tab" onclick="showToast('Rejada')">Rejada</div></div>
-<div class="table-card"><div class="table-toolbar"><div class="left"><h3>Aktivlar ro'yxati</h3></div><div style="display:flex;gap:10px"><button class="btn btn-sm btn-outline" onclick="showToast('Eksport Excel')">Excel</button><button class="btn btn-sm btn-outline" onclick="showToast('Eksport PDF')">PDF</button></div></div>
-<div class="table-wrap"><table><thead><tr><th>Nomi</th><th>Turi</th><th>Hudud</th><th>Qiymat</th><th>Holat</th><th>Ishgal</th><th>Ball</th><th></th></tr></thead><tbody>
-${ASSETS.map(a=>`<tr onclick="openDetail(${a.id})" style="cursor:pointer"><td><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0"><img src="${a.img}" style="width:100%;height:100%;object-fit:cover"></div><div><div style="font-weight:600">${a.name}</div><div style="font-size:11px;color:var(--text-3)">${a.code}</div></div></div></td><td>${a.type}</td><td>${a.region}</td><td class="mono" style="font-weight:600">${a.valueShort}</td><td><span class="status-badge ${a.status}"><span class="status-dot"></span>${a.status==='active'?'Faol':a.status==='maintenance'?'Ta\\'mirda':'Rejada'}</span></td><td>${a.occupancy}%</td><td><div style="display:flex;align-items:center;gap:6px"><div class="progress-bar" style="width:40px"><div class="progress-fill" style="width:${a.score}%;background:${a.score>=80?'var(--green)':a.score>=60?'var(--yellow)':'var(--red)'}"></div></div>${a.score}</div></td><td><button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();openDetail(${a.id})">→</button></td></tr>`).join('')}
-</tbody></table></div></div>
-</div>`}
-
-function openDetail(id){
-const a=ASSETS.find(x=>x.id===id);if(!a)return;
-const c=document.getElementById('contentArea');
-c.innerHTML=`<div class="slide-up">
-<div class="breadcrumb"><a onclick="navigateTo('assets')">Aktivlar</a><span>/</span><span>${a.name}</span></div>
-<div class="detail-header"><div><div class="detail-title">${a.name}</div><div class="detail-subtitle">${a.type} · ${a.region} · ${a.code}</div></div><div style="display:flex;gap:10px"><button class="btn btn-outline" onclick="showToast('Tahrirlash')">Tahrirlash</button><button class="btn btn-primary" onclick="showToast('Hisobot')">Hisobot</button></div></div>
-<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px"><div style="width:100%;height:280px;overflow:hidden"><img src="${a.img}" style="width:100%;height:100%;object-fit:cover"></div></div>
-<div class="detail-grid">
-<div class="detail-card"><h4>Asosiy ma'lumotlar</h4><div class="detail-row"><span class="label">Nomi</span><span class="val">${a.name}</span></div><div class="detail-row"><span class="label">Kadastr raqami</span><span class="val mono">${a.code}</span></div><div class="detail-row"><span class="label">Manzil</span><span class="val">${a.address}</span></div><div class="detail-row"><span class="label">Turi</span><span class="val">${a.type}</span></div><div class="detail-row"><span class="label">Hudud</span><span class="val">${a.region}</span></div></div>
-<div class="detail-card"><h4>Texnik ko'rsatkichlar</h4><div class="detail-row"><span class="label">Maydon</span><span class="val">${a.area}</span></div><div class="detail-row"><span class="label">Qavatlar</span><span class="val">${a.floors}</span></div><div class="detail-row"><span class="label">Xonalar</span><span class="val">${a.rooms}</span></div><div class="detail-row"><span class="label">Qurilgan yili</span><span class="val">${a.year||'—'}</span></div><div class="detail-row"><span class="label">Ijga stavkasi</span><span class="val">${a.rent}</span></div></div>
-<div class="detail-card" style="text-align:center"><h4>Sog'lik darajasi</h4><div class="health-gauge"><svg width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#F0F1F4" stroke-width="10"/><circle cx="60" cy="60" r="48" fill="none" stroke="${a.score>=80?'#7BC142':a.score>=60?'#F59E0B':'#EF4444'}" stroke-width="10" stroke-dasharray="${(a.score/100)*301.6} 301.6" transform="rotate(-90 60 60)" stroke-linecap="round"/></svg></div><div class="health-score" style="color:${a.score>=80?'var(--green)':a.score>=60?'var(--yellow)':'var(--red)'}">${a.score}</div><div class="health-label">${a.score>=80?'Yaxshi holat':a.score>=60?'O\\'rtacha':'E\\'tibor talab'}</div></div>
-</div>
-<div class="two-col">
-<div class="detail-card"><h4>Moliyaviy ko'rsatkichlar</h4><div class="detail-row"><span class="label">Bozor qiymati</span><span class="val mono">${a.value} so'm</span></div><div class="detail-row"><span class="label">Ishgal darajasi</span><span class="val">${a.occupancy}%</span></div><div class="detail-row"><span class="label">Oylik ijra daromadi</span><span class="val mono">${Math.round(parseInt(a.value.replace(/\\s/g,''))*0.008).toLocaleString('ru')} so'm</span></div><div class="detail-row"><span class="label">Soliq (12%)</span><span class="val mono">${Math.round(parseInt(a.value.replace(/\\s/g,''))*0.001).toLocaleString('ru')} so'm</span></div></div>
-<div class="detail-card"><h4>Faol shartnomalar</h4>${CONTRACTS.filter(c=>c.asset===a.name).map(c=>`<div class="detail-row"><span class="label">${c.tenant}</span><span class="val">${c.monthly} so'm/oy</span></div>`).join('')||'<div class="detail-row"><span class="label">Shartnomalar yo\'q</span></div>'}</div>
-</div>
-<div class="detail-card"><h4>Kameralar va xavfsizlik</h4><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px"><div style="background:#FAFBFC;padding:14px;border-radius:10px;text-align:center"><div style="font-size:24px;font-weight:800;color:var(--green)">8</div><div style="font-size:12px;color:var(--text-3)">Faol kamera</div></div><div style="background:#FAFBFC;padding:14px;border-radius:10px;text-align:center"><div style="font-size:24px;font-weight:800;color:var(--red)">1</div><div style="font-size:12px;color:var(--text-3)">Oflayn</div></div><div style="background:#FAFBFC;padding:14px;border-radius:10px;text-align:center"><div style="font-size:24px;font-weight:800;color:var(--blue)">24</div><div style="font-size:12px;color:var(--text-3)">Kirish hodisa</div></div></div><button class="btn btn-outline btn-sm" style="margin-top:12px" onclick="navigateTo('access')">Smart Access →</button></div>
-</div>`;
-document.getElementById('contentArea').scrollTop=0;
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Obyektlar ro\'yxati <span class="count-badge">6 obyekt</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Eksport...\')">Eksport</button><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi obyekt\')">+ Yangi obyekt</button></div></div><div style="display:flex;gap:10px;margin-bottom:20px"><div class="search-box" style="flex:1"><svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" placeholder="Obyekt nomi bo\'yicha qidirish..."></div><select class="filter-dropdown"><option>Barcha hududlar</option><option>Toshkent sh.</option><option>Toshkent vil.</option></select><select class="filter-dropdown"><option>Barcha turlar</option><option>Biznes markazi</option><option>Savdo markazi</option></select><select class="filter-dropdown"><option>Barcha statuslar</option><option>Faol</option><option>Rejada</option></select></div><div class="card" style="overflow:hidden"><table class="data-table"><thead><tr><th>OBYEKT</th><th>HUDUD</th><th>TURI</th><th>STATUS</th><th>QIYMATI</th><th>SIFAT</th><th></th></tr></thead><tbody>'+
+ASSETS.map(a=>'<tr onclick="navigateTo(\'assets\')" style="cursor:pointer"><td><div style="display:flex;align-items:center;gap:12px"><img src="'+a.img+'" style="width:40px;height:40px;border-radius:10px;object-fit:cover"><div><div style="font-weight:600">'+a.name+'</div><div style="font-size:11px;color:var(--text-3);font-family:IBM Plex Mono,monospace">'+a.code+'</div></div></div></td><td>'+a.region+'</td><td>'+a.type+'</td><td><span class="status-badge '+a.status+'"><span class="status-dot"></span>'+(a.status==='active'?'Faol':a.status==='maintenance'?"Ta'mirda":'Rejada')+'</span></td><td style="font-weight:700">'+a.value+'</td><td><span style="font-weight:700;color:'+(a.score>=80?'var(--green)':a.score>=60?'var(--orange)':'var(--red)')+'">'+a.score+'</span></td><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-3)"><path d="M9 18l6-6-6-6"/></svg></td></tr>').join('')+
+'</tbody></table></div></div>';
 }
-
-function renderContracts(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Shartnomalar <span class="count-badge">${CONTRACTS.length} ta</span></div><div class="page-actions"><button class="btn btn-outline" onclick="showToast('Filtr')">Filtr</button><button class="btn btn-primary" onclick="showToast('Yangi shartnoma')">+ Yangi shartnoma</button></div></div>
-<div class="tabs"><div class="tab active">Barchasi</div><div class="tab" onclick="showToast('Faol')">Faol</div><div class="tab" onclick="showToast('Tugayapti')">Tugayapti</div><div class="tab" onclick="showToast('Tugagan')">Tugagan</div></div>
-${CONTRACTS.map(c=>{
-const pct=Math.round((c.payments/c.total)*100);
-const dots=Math.min(c.payments,c.total);
-let timeline='';
-for(let i=0;i<Math.min(c.total,12);i++){
-if(i<dots){timeline+=`<div class="payment-dot done">✓</div>`}
-else if(i===dots){timeline+=`<div class="payment-dot pending">${i+1}</div>`}
-else{timeline+=`<div class="payment-dot future">${i+1}</div>`}
-if(i<Math.min(c.total,12)-1){timeline+=`<div class="payment-line ${i<dots?'done':''}"></div>`}
-}
-return `<div class="contract-card"><div class="contract-header"><div><div class="contract-number">${c.id}</div><div style="font-size:12px;color:var(--text-3);margin-top:2px">${c.period}</div></div><span class="status-badge ${c.status}"><span class="status-dot"></span>${c.status==='active'?'Faol':'Tugayapti'}</span></div>
-<div class="contract-parties"><div class="contract-party"><div class="role">Obyekt</div><div class="name">${c.asset}</div></div><div class="contract-party"><div class="role">Ijarachi</div><div class="name">${c.tenant}</div></div><div class="contract-party"><div class="role">Menejer</div><div class="name">${c.manager}</div></div></div>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><div style="font-size:13px;color:var(--text-3)">Oylik to'lov: <span class="mono" style="font-weight:700;color:var(--text)">${c.monthly} so'm</span></div><div style="font-size:12px;color:var(--text-3)">${c.payments}/${c.total} to'lov (${pct}%)</div></div>
-<div class="payment-timeline">${timeline}</div>
-<div style="display:flex;gap:8px;margin-top:16px"><button class="btn btn-sm btn-outline" onclick="showToast('Shartnoma: ${c.id}')">Batafsil</button><button class="btn btn-sm btn-outline" onclick="showToast('Yuklab olish')">Yuklab olish</button><button class="btn btn-sm btn-ghost" onclick="showToast('Tahrirlash')">Tahrirlash</button></div>
-</div>`}).join('')}
-</div>`}
-
 function renderLeasing(){
-const leases=[{id:'LZ-2024-001',asset:'Green Tower',lessee:'Uztelecom JSC',amount:'12 450 000 000',period:'36 oy',monthly:'345 000 000',progress:33,status:'active'},{id:'LZ-2024-002',asset:'Mega Mall',lessee:'Korzinka Markets',amount:'8 300 000 000',period:'24 oy',monthly:'345 000 000',progress:50,status:'active'},{id:'LZ-2024-003',asset:'Humo Office',lessee:'IT Park',amount:'5 100 000 000',period:'48 oy',monthly:'106 000 000',progress:8,status:'active'}];
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Lizing <span class="count-badge">${leases.length} ta</span></div><div class="page-actions"><button class="btn btn-primary" onclick="showToast('Yangi lizing')">+ Yangi lizing</button></div></div>
-<div class="stat-row"><div class="stat-mini"><div class="val">25,8 mlrd</div><div class="lbl">Jami lizing summasi</div></div><div class="stat-mini"><div class="val">796 mln</div><div class="lbl">Oylik to'lovlar</div></div><div class="stat-mini"><div class="val">3 ta</div><div class="lbl">Faol lizinglar</div></div><div class="stat-mini"><div class="val">36 oy</div><div class="lbl">O'rtacha muddat</div></div></div>
-${leases.map(l=>`<div class="leasing-card"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px"><div><div style="font-size:16px;font-weight:700">${l.id}</div><div style="font-size:13px;color:var(--text-3)">${l.asset} · ${l.lessee}</div></div><span class="status-badge ${l.status}"><span class="status-dot"></span>Faol</span></div>
-<div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--text-3)">Lizing summasi: <span class="mono" style="font-weight:700">${l.amount} so'm</span></span><span style="font-size:13px;color:var(--text-3)">Muddat: ${l.period}</span></div>
-<div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text-3)">To'lov progressi</span><span style="font-size:12px;font-weight:600">${l.progress}%</span></div>
-<div class="progress-bar"><div class="progress-fill" style="width:${l.progress}%;background:var(--green)"></div></div>
-<div style="display:flex;gap:8px;margin-top:12px"><button class="btn btn-sm btn-outline" onclick="showToast('${l.id}')">Batafsil</button><button class="btn btn-sm btn-outline" onclick="showToast('To\\'lov jadvali')">To'lov jadvali</button></div></div>`).join('')}
-</div>`}
-
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Lizing <span class="count-badge">4 shartnoma</span></div><div class="page-actions"><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi lizing\')">+ Yangi lizing</button></div></div><div class="dash-grid dash-kpis" style="margin-bottom:20px">'+
+renderKPI('Faol lizinglar','4 ta','+2','up','green','<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>')+
+renderKPI("Oylik to'lov",'287 mln',"so'm",'+12%','up','blue','<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>')+
+renderKPI('Jami qiymat','3,4 mlrd',"so'm",'+8%','up','orange','<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>')+
+renderKPI('Muddat tugaydi','1 ta','','','purple','<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>')+
+'</div><div class="card" style="padding:20px"><div class="section-title">Faol lizing shartnomalari</div><table class="data-table"><thead><tr><th>SHARTNOMA</th><th>OBYEKT</th><th>MIJOZ</th><th>OYLIK</th><th>STATUS</th><th>MUDDAT</th></tr></thead><tbody><tr><td style="font-family:IBM Plex Mono,monospace;font-size:12px">LSG-2024-001</td><td>Green Tower</td><td>RSG Group LLC</td><td style="font-weight:700">125 mln</td><td><span class="status-badge active"><span class="status-dot"></span>Faol</span></td><td>12 oy (8/12)</td></tr><tr><td style="font-family:IBM Plex Mono,monospace;font-size:12px">LSG-2024-002</td><td>Mega Mall</td><td>Korzinka Trade</td><td style="font-weight:700">89 mln</td><td><span class="status-badge active"><span class="status-dot"></span>Faol</span></td><td>12 oy (10/12)</td></tr><tr><td style="font-family:IBM Plex Mono,monospace;font-size:12px">LSG-2024-003</td><td>Humo Office</td><td>WorkSpace Hub</td><td style="font-weight:700">45 mln</td><td><span class="status-badge active"><span class="status-dot"></span>Faol</span></td><td>6 oy (3/6)</td></tr><tr><td style="font-family:IBM Plex Mono,monospace;font-size:12px">LSG-2024-004</td><td>Nurafshon</td><td>Individual</td><td style="font-weight:700">28 mln</td><td><span class="status-badge planned"><span class="status-dot"></span>Rejada</span></td><td>12 oy (2/12)</td></tr></tbody></table></div></div>';
+}
+function renderContracts(){
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Shartnomalar <span class="count-badge">4 hujjat</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Eksport...\')">Eksport</button><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi shartnoma\')">+ Yangi shartnoma</button></div></div><div class="tab-bar"><div class="tab active" onclick="showToast(\'Barchasi\')">Barchasi</div><div class="tab" onclick="showToast(\'Faol\')">Faol</div><div class="tab" onclick="showToast(\'Tugayotgan\')">Tugayotgan</div><div class="tab" onclick="showToast(\'Tugagan\')">Tugagan</div></div>'+
+CONTRACTS.map(c=>'<div class="contract-card"><div class="contract-header"><div class="contract-info"><h4>'+c.name+'</h4><div class="code">'+c.code+' - '+c.tenant+'</div></div><div class="contract-amount">'+c.amount+' <span class="period">'+c.period+'</span></div></div><div style="display:flex;gap:16px;margin-bottom:12px"><span class="status-badge '+(c.status==='active'?'active':'planned')+'"><span class="status-dot"></span>'+(c.status==='active'?'Faol':'Kutilmoqda')+'</span><span style="font-size:13px;color:var(--text-3)">'+c.paid+'/'+c.payments+" oy to'langan"+'</span></div><div class="payment-timeline">'+Array.from({length:c.payments},(_,i)=>'<div class="payment-step '+(i<c.paid?'paid':i===c.paid?'pending':'')+'"></div>').join('')+'</div><div class="payment-labels">'+Array.from({length:c.payments},(_,i)=>'<span>'+(i+1)+'</span>').join('')+'</div></div>').join('')+
+'</div>';
+}
 function renderExpenses(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Xarajatlar <span class="count-badge">2024-yil</span></div><div class="page-actions"><button class="btn btn-outline" onclick="showToast('Filtr')">Filtr</button><button class="btn btn-primary" onclick="showToast('Yangi xarajat')">+ Yangi xarajat</button></div></div>
-<div class="kpi-grid"><div class="kpi-card"><div class="kpi-label">Jami xarajatlar (oy)</div><div class="kpi-value">700<span class="unit">mln so'm</span></div><div class="kpi-trend down">↓ 3,2%</div></div><div class="kpi-card"><div class="kpi-label">Budget (oy)</div><div class="kpi-value">850<span class="unit">mln so'm</span></div><div class="kpi-trend up">82% ishlatildi</div></div><div class="kpi-card"><div class="kpi-label">O'rtacha/obyekt</div><div class="kpi-value">562<span class="unit">ming so'm</span></div><div class="kpi-trend up">↑ 1,8%</div></div><div class="kpi-card"><div class="kpi-label">Tejash (oy)</div><div class="kpi-value">150<span class="unit">mln so'm</span></div><div class="kpi-trend up">↑ 12%</div></div></div>
-<div class="two-col"><div class="expense-card"><h3 style="font-size:15px;font-weight:700;margin-bottom:16px">Kategoriyalar bo'yicha</h3>${EXPENSES.map(e=>`<div class="expense-row"><div class="expense-cat"><div class="expense-cat-icon" style="background:${e.color}20;color:${e.color}">${svgIcon(e.icon,18,18)}</div><div><div style="font-weight:600;font-size:13px">${e.cat}</div><div class="expense-pct">${e.pct}% umumiy xarajatlardan</div></div></div><div style="text-align:right"><div class="expense-amount mono">${e.amount}</div><div style="font-size:11px;color:var(--text-3)">so'm</div></div></div>`).join('')}</div>
-<div class="expense-card"><h3 style="font-size:15px;font-weight:700;margin-bottom:16px">Oylik dinamika</h3><div class="chart-bar">${['Yan','Fev','Mar','Apr','May','Iyun','Iyul'].map((m,i)=>{const h=[55,62,48,71,65,58,70][i];return `<div class="chart-bar-item"><div class="chart-bar-fill" style="height:${h}%;background:linear-gradient(180deg,var(--green),var(--green-dark))"></div><div class="chart-bar-label">${m}</div></div>`}).join('')}</div></div></div>
-</div>`}
-
+const maxExp=Math.max(...EXPENSES.map(e=>e.amount));
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Xarajatlar <span class="count-badge">2024</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Filtr\')">Filtr</button><button class="btn btn-primary btn-sm" onclick="showToast(\'Hisobot\')">Hisobot</button></div></div><div class="dash-grid dash-kpis" style="margin-bottom:20px">'+
+renderKPI("Yillik xarajatlar",'405 mln',"so'm",'+8,2%','up','orange','<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>')+
+renderKPI("Oylik o'rtacha",'34 mln',"so'm",'','down','blue','<path d="M18 20V10M12 20V4M6 20v-6"/>')+
+renderKPI("Eng katta xarajat",'142 mln',"so'm",'','green','<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>')+
+renderKPI('Byudjet ijrosi','87%','','','up','purple','<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>')+
+'</div><div class="dash-main"><div class="card" style="padding:20px"><div class="section-title">Oylik xarajatlar</div><div class="expense-chart">'+
+EXPENSES.map(e=>'<div class="expense-bar" style="height:'+(e.amount/maxExp*180)+'px"><span class="tip">'+e.amount+' mln</span></div>').join('')+
+'</div><div class="expense-labels">'+EXPENSES.map(e=>'<span>'+e.month+'</span>').join('')+'</div></div><div class="card" style="padding:20px"><div class="section-title">Kategoriyalar</div>'+
+EXPENSE_CATS.map(c=>'<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600">'+c.label+'</span><span style="font-size:13px;font-weight:700;color:'+c.color+'">'+c.amount+"</span></div><div class='progress-bar'><div class='fill' style='width:"+c.pct+"%;background:"+c.color+"'></div></div></div>").join('')+
+'</div></div></div>';
+}
 function renderReports(){
-const reports=[{title:'Aktivlar hisoboti',desc:'Barcha aktivlar bo\'yicha to\'liq hisobot',icon:'assets',color:'var(--green)'},{title:'Moliyaviy hisobot',desc:'Daromad va xarajatlar tahlili',icon:'dollar',color:'var(--blue)'},{title:'Shartnomalar hisoboti',desc:'Faol va tugagan shartnomalar',icon:'contract',color:'var(--orange)'},{title:'Texnik holat hisoboti',desc:'Ob\'ektlar sog\'lik darajasi',icon:'shield',color:'var(--purple)'},{title:'Kirish nazorati hisoboti',desc:'Smart Access statistikasi',icon:'access',color:'var(--teal)'},{title:'Audit hisoboti',desc:'Tizim harakatlari jurnali',icon:'audit',color:'var(--text-2)'}];
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Hisobotlar</div><div class="page-actions"><button class="btn btn-primary" onclick="showToast('Maxsus hisobot')">+ Maxsus hisobot</button></div></div>
-<div class="three-col">${reports.map(r=>`<div class="report-card" onclick="showToast('${r.title} yuklanmoqda...')"><div class="icon" style="background:${r.color}15;color:${r.color}">${svgIcon(r.icon,24,24)}</div><h4>${r.title}</h4><p>${r.desc}</p><div style="display:flex;gap:8px;margin-top:12px"><button class="btn btn-sm btn-outline" onclick="event.stopPropagation();showToast('PDF yuklanmoqda')">PDF</button><button class="btn btn-sm btn-outline" onclick="event.stopPropagation();showToast('Excel yuklanmoqda')">Excel</button></div></div>`).join('')}</div>
-</div>`}
-
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Hisobotlar <span class="count-badge">12 hisobot</span></div><div class="page-actions"><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi hisobot\')">+ Yangi hisobot</button></div></div><div class="dash-grid dash-kpis" style="margin-bottom:20px">'+
+renderKPI('Aktiv hisobotlar','12 ta','+3','up','green','<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>')+
+renderKPI("Rejalashtirilgan",'4 ta','','','blue','<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>')+
+renderKPI("Yuklab olingan",'89 ta','+12%','up','orange','<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>')+
+renderKPI('Avtomatik','3 ta','','','purple','<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>')+
+'</div><div class="card" style="padding:20px"><div class="section-title">Mavjud hisobotlar</div><table class="data-table"><thead><tr><th>NOMI</th><th>TURI</th><th>DAVRI</th><th>STATUS</th><th></th></tr></thead><tbody>'+
+["Aktivlar holati bo'yicha hisobot|Moliyaviy hisobot 2024|Ijara daromadi tahlili|Texnik xizmat hisoboti|Xavfsizlik audit hisoboti|Bino reestr sinxronlash".split('|').map((r,i)=>'<tr><td style="font-weight:600">'+r+'</td><td>'+['Boshqaruv','Moliyaviy','Daromad','Texnik','Xavfsizlik','Integratsiya'][i]+'</td><td>'+['Oylik','Yillik','Choraklik','Oylik','Oylik','Haftalik'][i]+'</td><td><span class="status-badge '+(i<4?'active':'planned')+'"><span class="status-dot"></span>'+(i<4?'Tayyor':'Jarayonda')+'</span></td><td><button class="btn btn-sm btn-outline" onclick="showToast(\'Yuklash\')">Yuklash</button></td></tr>').join('')+
+'</tbody></table></div></div>';
+}
 function renderNotifications(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Bildirishnomalar <span class="count-badge">3 yangi</span></div><div class="page-actions"><button class="btn btn-outline" onclick="showToast('Barchasi o\\'qildi')">Barchasini o'qilgan deb belgilash</button></div></div>
-<div class="notif-list">${NOTIFICATIONS.map((n,i)=>{const colors={critical:'var(--red)',warning:'var(--yellow)',info:'var(--blue)',success:'var(--green)'};const bgs={critical:'var(--red-light)',warning:'var(--yellow-light)',info:'var(--blue-light)',success:'var(--green-bg)'};const icons={critical:'alert',warning:'bell',info:'bell',success:'check'};return `<div class="notif-item ${i<3?'unread':''}" onclick="showToast('Bildirishnoma: ${n.title}')"><div class="notif-icon" style="background:${bgs[n.type]};color:${colors[n.type]}">${svgIcon(icons[n.type],18,18)}</div><div class="notif-content"><div class="title">${n.title}</div><div class="desc">${n.desc}</div><div class="time">${n.time}</div></div></div>`}).join('')}</div>
-</div>`}
-
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Bildirishnomalar <span class="count-badge">5 yangi</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Hammasini o\\\'qish\')">Hammasini o\'qish</button></div></div><div class="card" style="padding:8px">'+
+ALERTS.map(a=>'<div class="alert-item '+a.type+'" style="border-radius:12px;margin:8px"><div class="alert-icon '+a.type+'">'+(a.type==='critical'?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>':a.type==='warning'?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>')+'</div><div class="alert-body"><h5>'+a.title+'</h5><p>'+a.desc+'</p></div><span class="alert-time">'+a.time+'</span></div>').join('')+
+'</div></div>';
+}
 function renderAccess(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Smart Access</div><div class="page-actions"><button class="btn btn-outline" onclick="showToast('Sozlamalar')">Sozlamalar</button><button class="btn btn-primary" onclick="showToast('Yangi kamera')">+ Kamera qo'shish</button></div></div>
-<div class="two-col"><div class="access-panel"><div class="access-header"><div><h3 style="font-size:15px;font-weight:700">Kamera — CAM-01 (Green Tower)</h3><div style="font-size:12px;color:var(--text-3)">Bosh kirish · Onlayn</div></div><span class="status-badge active"><span class="status-dot"></span>Onlayn</span></div>
-<div class="camera-feed"><img src="${IMG.businessCenter}" alt="Camera"><div class="scan-overlay"><div class="scan-frame"><div class="scan-line"></div></div></div></div>
-<div class="access-info"><div style="display:flex;justify-content:space-between;margin-bottom:16px"><div><div style="font-size:13px;color:var(--text-3)">Bugungi kirishlar</div><div style="font-size:24px;font-weight:800">24</div></div><div><div style="font-size:13px;color:var(--text-3)">Rad etilgan</div><div style="font-size:24px;font-weight:800;color:var(--red)">2</div></div><div><div style="font-size:13px;color:var(--text-3)">Kutilmoqda</div><div style="font-size:24px;font-weight:800;color:var(--yellow)">1</div></div></div>
-<div class="access-btn-group"><button class="btn btn-primary" onclick="showToast('Eshik ochildi')">Eshikni ochish</button><button class="btn btn-outline" onclick="showToast('Face ID tekshirish')">Face ID</button><button class="btn btn-danger" onclick="showToast('Bloklandi')">Bloklash</button></div></div></div>
-<div class="detail-card"><h4>Oxirgi kirishlar</h4><div class="detail-row"><span class="label">14:32 — Akmalov A.</span><span class="val" style="color:var(--green)">✓ Ruxsat</span></div><div class="detail-row"><span class="label">14:15 — Mehmon (Bahodir K.)</span><span class="val" style="color:var(--green)">✓ Face ID</span></div><div class="detail-row"><span class="label">13:48 — Noma'lum shaxs</span><span class="val" style="color:var(--red)">✗ Rad</span></div><div class="detail-row"><span class="label">13:20 — Sodiqov S.</span><span class="val" style="color:var(--green)">✓ Ruxsat</span></div><div class="detail-row"><span class="label">12:55 — Karimov B.</span><span class="val" style="color:var(--green)">✓ Ruxsat</span></div><div class="detail-row"><span class="label">12:30 — Mehmon (Dilshod R.)</span><span class="val" style="color:var(--red)">✗ Rad</span></div></div></div>
-<div class="three-col"><div class="stat-mini"><div class="val">8</div><div class="lbl">Faol kameralar</div></div><div class="stat-mini"><div class="val" style="color:var(--red)">1</div><div class="lbl">Oflayn</div></div><div class="stat-mini"><div class="val">246</div><div class="lbl">Bugungi kirishlar</div></div></div>
-</div>`}
-
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Smart Access <span class="count-badge">Face ID</span></div><div class="page-actions"><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi qoida\')">+ Kirish qoidasi</button></div></div><div class="dash-grid dash-kpis" style="margin-bottom:20px">'+
+renderKPI("Bugungi kirishlar",'47 ta','+12%','up','green','<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>')+
+renderKPI("Tasdiqlangan",'42 ta','','','blue','<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>')+
+renderKPI("Rad etilgan",'5 ta','','','red','<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>')+
+renderKPI("Face ID aniqligi",'98,4%','','','up','purple','<circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/>')+
+'</div><div class="dash-main"><div class="card" style="padding:24px;text-align:center"><div class="section-title">Face ID tekshiruvi</div><div class="access-sim"><div class="face-scan"><div class="scan-text" id="scanText">Yuzni skanerlash...</div></div><div class="access-step active" id="step1"><div class="access-step-icon">1</div><div><h5>Kamera aniqlandi</h5><p>CAM-01 - Green Tower, kirish</p></div></div><div class="access-step" id="step2"><div class="access-step-icon">2</div><div><h5>Yuz aniqlandi</h5><p>Face ID bazasi bilan solishtirilmoqda</p></div></div><div class="access-step" id="step3"><div class="access-step-icon">3</div><div><h5>Tasdiqlash</h5><p>Operator tasdigi kutilmoqda</p></div></div><button class="btn btn-primary" style="width:100%;margin-top:16px" onclick="simulateAccess()">Skanerlashni boshlash</button></div></div><div class="card" style="padding:20px"><div class="section-title">So\'nggi kirishlar</div><table class="data-table"><thead><tr><th>SHAXS</th><th>USUL</th><th>OBYEKT</th><th>VAQT</th><th></th></tr></thead><tbody><tr><td style="font-weight:600">Akmalov A.</td><td>Face ID</td><td>Green Tower</td><td>09:02</td><td><span class="status-badge active"><span class="status-dot"></span>Ruxsat</span></td></tr><tr><td style="font-weight:600">Karimov K.</td><td>Karta</td><td>Mega Mall</td><td>08:45</td><td><span class="status-badge active"><span class="status-dot"></span>Ruxsat</span></td></tr><tr><td style="font-weight:600">Nomalum</td><td>Face ID</td><td>Humo Office</td><td>08:30</td><td><span class="status-badge offline"><span class="status-dot"></span>Rad</span></td></tr></tbody></table></div></div></div>';
+}
+function simulateAccess(){const steps=['step1','step2','step3'];let i=0;const interval=setInterval(()=>{if(i<3){const s=document.getElementById(steps[i]);if(s){s.classList.remove('active');s.classList.add('done');}i++;if(i<3){const n=document.getElementById(steps[i]);if(n)n.classList.add('active');}}else{clearInterval(interval);const st=document.getElementById('scanText');if(st)st.textContent='Ruxsat berildi';showToast('Kirish ruxsat etildi');}},1200);}
 function renderStorage(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Ma'lumotlarni saqlash</div><div class="page-actions"><button class="btn btn-primary" onclick="showToast('Fayl yuklash')">+ Fayl yuklash</button></div></div>
-<div class="kpi-grid"><div class="kpi-card"><div class="kpi-label">Jami hajm</div><div class="kpi-value">847<span class="unit">GB</span></div><div class="kpi-trend up">68% ishlatildi</div></div><div class="kpi-card"><div class="kpi-label">Fayllar</div><div class="kpi-value">12 548<span class="unit">ta</span></div><div class="kpi-trend up">↑ 234</div></div><div class="kpi-card"><div class="kpi-label">Hujjatlar</div><div class="kpi-value">3 245<span class="unit">ta</span></div><div class="kpi-trend up">↑ 12</div></div><div class="kpi-card"><div class="kpi-label">Rasmlar</div><div class="kpi-value">8 902<span class="unit">ta</span></div><div class="kpi-trend up">↑ 189</div></div></div>
-<div class="storage-card"><h3 style="font-size:15px;font-weight:700;margin-bottom:8px">Saqlash turlari</h3><div class="detail-row"><span class="label">Hujjatlar (PDF, DOCX)</span><span class="val mono">234 GB</span></div><div class="storage-bar"><div class="fill" style="width:28%;background:var(--blue)"></div></div>
-<div class="detail-row"><span class="label">Rasmlar va video</span><span class="val mono">412 GB</span></div><div class="storage-bar"><div class="fill" style="width:48%;background:var(--green)"></div></div>
-<div class="detail-row"><span class="label">Shartnomalar va arxiv</span><span class="val mono">156 GB</span></div><div class="storage-bar"><div class="fill" style="width:18%;background:var(--orange)"></div></div>
-<div class="detail-row"><span class="label">Audit loglari</span><span class="val mono">45 GB</span></div><div class="storage-bar"><div class="fill" style="width:5%;background:var(--purple)"></div></div></div>
-<div class="detail-card"><h4>Oxirgi yuklangan fayllar</h4><div class="detail-row"><span class="label">Green Tower — texnik pasport.pdf</span><span class="val">2 daqiqa</span></div><div class="detail-row"><span class="label">Mega Mall — ijara shartnomasi.pdf</span><span class="val">1 soat</span></div><div class="detail-row"><span class="label">Humo Office — kadastri hujjat.pdf</span><span class="val">3 soat</span></div><div class="detail-row"><span class="label">Nurafshon — ta'mir reja.pdf</span><span class="val">1 kun</span></div><div class="detail-row"><span class="label">Chorvoq — yer guvohnoma.pdf</span><span class="val">2 kun</span></div></div>
-</div>`}
-
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Ma\'lumotlarni saqlash <span class="count-badge">2,4 TB</span></div><div class="page-actions"><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi papka\')">+ Papka</button></div></div><div class="dash-grid dash-kpis" style="margin-bottom:20px">'+
+renderKPI("Jami hajm",'2,4 TB','','','green','<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>')+
+renderKPI("Foydalanilgan",'1,8 TB','75%','','orange','<path d="M18 20V10M12 20V4M6 20v-6"/>')+
+renderKPI("Fayllar",'12 847 ta','+234','up','blue','<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>')+
+renderKPI("Zaxira nusxa",'3 ta','avto','up','purple','<path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.7 2.8L21 8"/><path d="M21 3v5h-5"/>')+
+'</div><div class="card" style="padding:20px"><div class="section-title">Papkalar</div>'+
+['Shartnomalar va hujjatlar|Bino reestr arxiv|Texnik hujjatlar|Sug\'urta polislari|Kamera yozuvlari|Audit loglari'.split('|').map((f,i)=>'<div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-light);cursor:pointer"><div style="width:40px;height:40px;border-radius:10px;background:'+['#7BC142','#2D7FF9','#F97316','#8B5CF6','#14B8A6','#EF4444'][i]+'15;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+['#7BC142','#2D7FF9','#F97316','#8B5CF6','#14B8A6','#EF4444'][i]+'" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div style="flex:1"><div style="font-weight:600">'+f+'</div><div style="font-size:12px;color:var(--text-3)">'+['234','1 245','567','89','5 678','4 034'][i]+' fayl - '+['128 MB','892 MB','256 MB','34 MB','1,2 GB','180 MB'][i]+'</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-3)"><path d="M9 18l6-6-6-6"/></svg></div>').join('')+
+'</div></div>';
+}
 function renderAudit(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Audit jurnali</div><div class="page-actions"><button class="btn btn-outline" onclick="showToast('Filtr')">Filtr</button><button class="btn btn-outline" onclick="showToast('Eksport')">Eksport</button></div></div>
-<div class="tabs"><div class="tab active">Barchasi</div><div class="tab" onclick="showToast('Kirish')">Kirish</div><div class="tab" onclick="showToast('Yaratish')">Yaratish</div><div class="tab" onclick="showToast('Yangilash')">Yangilash</div><div class="tab" onclick="showToast('O\\'chirish')">O'chirish</div></div>
-<div class="table-card"><div class="table-wrap"><table><thead><tr><th>Vaqti</th><th>Foydalanuvchi</th><th>Amal</th><th>Turi</th></tr></thead><tbody>${AUDIT_LOG.map(l=>`<tr><td class="mono">${l.time}</td><td style="font-weight:600">${l.user}</td><td>${l.action}</td><td><span class="audit-tag ${l.tag}">${l.tag==='login'?'Kirish':l.tag==='create'?'Yaratish':l.tag==='update'?'Yangilash':'O\\'chirish'}</span></td></tr>`).join('')}</tbody></table></div></div>
-</div>`}
-
+const colors=['#7BC142','#2D7FF9','#F97316','#8B5CF6','#14B8A6','#EF4444'];
+const logs=[{name:'AA',color:colors[0],action:"Green Tower ma'lumotlari yangilandi",detail:'Qiymat: 12,5 mlrd - 12,45 mlrd',time:'5 min avval'},{name:'AA',color:colors[0],action:'Yangi shartnoma yaratildi',detail:'CNT-2024-001 - RSG Group LLC',time:'1 soat avval'},{name:'KK',color:colors[1],action:"Kamera statusi o'zgartirildi",detail:'CAM-12 - Offline - Online',time:'2 soat avval'},{name:'SS',color:colors[2],action:'Texnik xizmat yakunlandi',detail:'Humo Office - HVAC tizimi',time:'3 soat avval'},{name:'AA',color:colors[0],action:'Bino reestr sinxronlash',detail:"267 ta yangi yozuv qo'shildi",time:'5 soat avval'}];
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Audit jurnali <span class="count-badge">247 yozuv</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Filtr\')">Filtr</button><button class="btn btn-outline btn-sm" onclick="showToast(\'Eksport\')">Eksport</button></div></div><div class="tab-bar"><div class="tab active">Barchasi</div><div class="tab">Tahrir</div><div class="tab">Yaratish</div><div class="tab">Tizim</div></div><div class="card" style="padding:20px">'+
+logs.map(l=>'<div class="audit-entry"><div class="audit-avatar" style="background:'+l.color+'">'+l.name+'</div><div class="audit-body"><h5>'+l.action+'</h5><p>'+l.detail+'</p></div><span class="audit-time">'+l.time+'</span></div>').join('')+
+'</div></div>';
+}
 function renderSettings(){
-return `<div class="slide-up">
-<div class="page-header"><div class="page-title">Sozlamalar</div></div>
-il</h3>
-<div class="setting-row"><div class="setting-info"><div class="title">Ism familiya</div><div class="desc">Tizimda ko'rinadigan ismingiz</div></div><div style="font-weight:600">Akmalov Akmal</div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Email</div><div class="desc">Elektron pochta manzili</div></div><div style="font-weight:600">akmalov@auga.uz</div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Telefon</div><div class="desc">Aloqa telefon raqami</div></div><div style="font-weight:600">+998 71 200 00 00</div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Rol</div><div class="desc">Tizimdagi huquqlar darajasi</div></div><span class="status-badge active"><span class="status-dot"></span>Rahbar</span></div></div>
-<div class="settings-section"><h3>Xavfsizlik</h3>
-<div class="setting-row"><div class="setting-info"><div class="title">Ikki bosqichli autentifikatsiya</div><div class="desc">SMS orqali qo'shimcha himoya</div></div><div class="toggle on" onclick="this.classList.toggle('on');showToast('2FA o\\'zgartirildi')"></div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Face ID kirish</div><div class="desc">Yuz orqali tizimga kirish</div></div><div class="toggle on" onclick="this.classList.toggle('on');showToast('Face ID o\\'zgartirildi')"></div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Parolni o'zgartirish</div><div class="desc">Har 90 kunda yangilash</div></div><button class="btn btn-sm btn-outline" onclick="showToast('Parolni o\\'zgartirish')">O'zgartirish</button></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Seanslar tarixi</div><div class="desc">Faol tizimga kirishlar</div></div><button class="btn btn-sm btn-outline" onclick="showToast('Seanslar tarixi')">Ko'rish</button></div></div>
-<div class="settings-section"><h3>Bildirishnomalar</h3>
-<div class="setting-row"><div class="setting-info"><div class="title">Telegram bildirishnomalar</div><div class="desc">Muhim hodisalarni Telegram orqali oling</div></div><div class="toggle on" onclick="this.classList.toggle('on');showToast('Telegram bildirishnomalari')"></div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Email bildirishnomalar</div><div class="desc">Hisobotlar va xabarlar email orqali</div></div><div class="toggle" onclick="this.classList.toggle('on');showToast('Email bildirishnomalari')"></div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Kritik ogohlantirishlar</div><div class="desc">Yong\\'in, kamera oflayn va boshqalar</div></div><div class="toggle on" onclick="this.classList.toggle('on');showToast('Kritik ogohlantirishlar')"></div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Kunlik hisobot</div><div class="desc">Har kuni ertalab avtomatik hisobot</div></div><div class="toggle" onclick="this.classList.toggle('on');showToast('Kunlik hisobot')"></div></div></div>
-<div class="settings-section"><h3>Tizim</h3>
-<div class="setting-row"><div class="setting-info"><div class="title">Til</div><div class="desc">Interfeys tili</div></div><div style="font-weight:600">O'zbekcha (Lotin)</div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Vaqt zonasi</div><div class="desc">Tizim vaqt zonasi</div></div><div style="font-weight:600">UTC+5 (Toshkent)</div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Valyuta</div><div class="desc">Hisobotlarda ko'rsatiladigan valyuta</div></div><div style="font-weight:600">UZS (so'm)</div></div>
-<div class="setting-row"><div class="setting-info"><div class="title">Tizim versiyasi</div><div class="desc">Joriy versiya</div></div><div style="font-weight:600;color:var(--text-3)">AUGA v2.4.1</div></div></div>
-</div>`}
-
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Sozlamalar</div></div><div class="settings-section"><h3>Profil</h3><div class="setting-row"><div class="setting-info"><div class="title">Ism familiya</div><div class="desc">Tizimda ko\'rinadigan ismingiz</div></div><div style="font-weight:600">Akmalov Akmal</div></div><div class="setting-row"><div class="setting-info"><div class="title">Email</div><div class="desc">Elektron pochta manzili</div></div><div style="font-weight:600">akmalov@auga.uz</div></div><div class="setting-row"><div class="setting-info"><div class="title">Telefon</div><div class="desc">Aloqa telefon raqami</div></div><div style="font-weight:600">+998 71 200 00 00</div></div><div class="setting-row"><div class="setting-info"><div class="title">Rol</div><div class="desc">Tizimdagi huquqlar darajasi</div></div><span class="status-badge active"><span class="status-dot"></span>Rahbar</span></div></div><div class="settings-section"><h3>Xavfsizlik</h3><div class="setting-row"><div class="setting-info"><div class="title">Ikki bosqichli autentifikatsiya</div><div class="desc">SMS orqali qo\'shimcha himoya</div></div><div class="toggle on" onclick="this.classList.toggle(\'on\');showToast(\'2FA o\\\'zgartirildi\')"></div></div><div class="setting-row"><div class="setting-info"><div class="title">Face ID kirish</div><div class="desc">Yuz orqali tizimga kirish</div></div><div class="toggle on" onclick="this.classList.toggle(\'on\');showToast(\'Face ID\')"></div></div><div class="setting-row"><div class="setting-info"><div class="title">Parolni o\'zgartirish</div><div class="desc">Har 90 kunda yangilash</div></div><button class="btn btn-sm btn-outline" onclick="showToast(\'Parol\')">O\'zgartirish</button></div></div><div class="settings-section"><h3>Bildirishnomalar</h3><div class="setting-row"><div class="setting-info"><div class="title">Telegram bildirishnomalar</div><div class="desc">Muhim hodisalar</div></div><div class="toggle on" onclick="this.classList.toggle(\'on\');showToast(\'Telegram\')"></div></div><div class="setting-row"><div class="setting-info"><div class="title">Email bildirishnomalar</div><div class="desc">Hisobotlar email orqali</div></div><div class="toggle" onclick="this.classList.toggle(\'on\');showToast(\'Email\')"></div></div><div class="setting-row"><div class="setting-info"><div class="title">Kritik ogohlantirishlar</div><div class="desc">Yong\'in, kamera oflayn</div></div><div class="toggle on" onclick="this.classList.toggle(\'on\');showToast(\'Kritik\')"></div></div></div><div class="settings-section"><h3>Tizim</h3><div class="setting-row"><div class="setting-info"><div class="title">Til</div><div class="desc">Interfeys tili</div></div><div style="font-weight:600">O\'zbekcha (Lotin)</div></div><div class="setting-row"><div class="setting-info"><div class="title">Vaqt zonasi</div><div class="desc">Tizim vaqt zonasi</div></div><div style="font-weight:600">UTC+5 (Toshkent)</div></div><div class="setting-row"><div class="setting-info"><div class="title">Valyuta</div><div class="desc">Hisobotlarda ko\'rsatiladigan valyuta</div></div><div style="font-weight:600">UZS (so\'m)</div></div><div class="setting-row"><div class="setting-info"><div class="title">Tizim versiyasi</div><div class="desc">Joriy versiya</div></div><div style="font-weight:600;color:var(--text-3)">AUGA v2.4.1</div></div></div></div>';
+}
+function renderErrors(){
+const errors=[{title:'Sahifa topilmadi',desc:"404 - sahifa mavjud emas",btn:'Bosh sahifaga qaytish',icon:'404'},{title:'Kamera oflayn',desc:'Kamera ulanishi yo\'qoldi',btn:'Qayta tekshirish',icon:'CAM'},{title:'Internet aloqasi yo\'q',desc:"Tarmoq bilan bog'lanishda xatolik",btn:'Qayta tekshirish',icon:'NET'},{title:"Ma'lumotlar sinxronlanmoqda",desc:'Bino reestr bilan sinxronlash',progress:67,icon:'SYNC'},{title:'Yuz mos kelmadi',desc:'Face ID tekshiruvda moslik topilmadi',btn:"Qayta urinib ko'rish",icon:'FACE'},{title:'Kirish taqiqlangan',desc:'403 - ruxsat berilmagan',btn:'Bosh sahifaga qaytish',icon:'403'},{title:"Yong'in signali",desc:'Kritik holat!',btn:'Tez yordam',btnRed:true,icon:'FIRE'},{title:'Tizim texnik xizmatda',desc:'Rejalashtirilgan ish',btn:"Batafsil ma'lumot",icon:'WRENCH'}];
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Tizim holati <span class="count-badge">8 holat</span></div></div><div class="error-grid">'+
+errors.map(e=>'<div class="error-card"><div class="error-icon" style="background:'+(e.btnRed?'var(--red-light)':'var(--blue-light)')+';color:'+(e.btnRed?'var(--red)':'var(--blue)')+'">'+e.icon+'</div><h4>'+e.title+'</h4><p>'+e.desc+'</p>'+(e.progress?'<div class="progress-bar" style="margin-bottom:16px"><div class="fill" style="width:'+e.progress+'%;background:var(--green)"></div></div><span style="font-size:12px;color:var(--text-3)">'+e.progress+'%</span>':'<button class="btn btn-sm '+(e.btnRed?'btn-danger':'btn-primary')+'" style="width:100%" onclick="showToast(\''+e.btn+'\')">'+e.btn+'</button>')+'</div>').join('')+
+'</div></div>';
+}
+function initMap(){const container=document.getElementById('mapContainer');if(!container)return;MAP_MARKERS.forEach(m=>{const el=document.createElement('div');el.className='map-marker';el.style.left=m.x+'%';el.style.top=m.y+'%';el.style.background=m.status==='active'?'#7BC142':m.status==='maintenance'?'#F97316':'#2D7FF9';el.innerHTML='<div class="label">'+m.name+' - '+m.value+'</div>';el.onclick=()=>showToast('Marker: '+m.name);container.appendChild(el);});}
+function toggleFilter(key){activeFilter=activeFilter===key?null:key;navigateTo('dashboard');setTimeout(initMap,10);}
+function startTime(){const update=()=>{const d=new Date();const t=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');const el=document.getElementById('timeDisplay');if(el)el.textContent=t;};update();setInterval(update,1000);}
+function showToast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{t.remove()},2500);}
 </script>
 </body>
 </html>
