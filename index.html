@@ -236,6 +236,39 @@ img{max-width:100%;display:block}
 .error-card .error-icon{width:56px;height:56px;margin:0 auto 16px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800}
 .error-card h4{font-size:16px;font-weight:700;margin-bottom:6px}
 .error-card p{font-size:13px;color:var(--text-3);margin-bottom:16px}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .25s ease}
+.modal-overlay.show{opacity:1;visibility:visible}
+.modal{background:#fff;border-radius:20px;width:520px;max-width:90vw;max-height:85vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.16);transform:translateY(20px) scale(.96);transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.modal-overlay.show .modal{transform:translateY(0) scale(1)}
+.modal-header{padding:24px 28px 16px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between}
+.modal-header h3{font-size:18px;font-weight:700}
+.modal-close{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--text-3);transition:var(--transition)}
+.modal-close:hover{background:#F5F6F8;color:var(--text)}
+.modal-body{padding:24px 28px}
+.modal-footer{padding:16px 28px 24px;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--border-light)}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.form-group input,.form-group select,.form-group textarea{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;outline:none;transition:var(--transition);background:#FAFBFC}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(123,193,66,.1);background:#fff}
+.form-group textarea{height:auto;padding:12px 14px;resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.report-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.report-type-card{padding:16px;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:var(--transition);display:flex;gap:12px;align-items:flex-start}
+.report-type-card:hover{border-color:var(--green);background:var(--green-50)}
+.report-type-card.selected{border-color:var(--green);background:var(--green-light)}
+.report-type-card .rt-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.report-type-card .rt-icon.green{background:var(--green-bg);color:var(--green-dark)}
+.report-type-card .rt-icon.blue{background:var(--blue-light);color:var(--blue)}
+.report-type-card .rt-icon.orange{background:var(--orange-light);color:var(--orange)}
+.report-type-card .rt-icon.purple{background:var(--purple-light);color:var(--purple)}
+.report-type-card .rt-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.report-type-card .rt-desc{font-size:11px;color:var(--text-3)}
+.date-range{display:flex;gap:10px;align-items:center;margin-bottom:16px}
+.date-range select{height:40px;padding:0 12px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;background:#FAFBFC;outline:none}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text);color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:2000;opacity:0;transition:all .3s ease}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
 </style>
 </head>
 <body>
@@ -293,7 +326,7 @@ img{max-width:100%;display:block}
         <div class="time-display" id="timeDisplay">09:00</div>
         <div class="notif-btn" onclick="navigateTo('notifications')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot"></span></div>
         <div class="user-chip"><div class="user-avatar" id="userAvatar">AA</div><div><div class="user-name" id="userName">Akmalov A.</div><div class="user-role" id="userRole">Rahbar</div></div></div>
-        <button class="report-btn" onclick="showToast('Hisobot yaratilmoqda...')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Hisobot yaratish</button>
+        <button class="report-btn" onclick="openModal('reportModal')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Hisobot yaratish</button>
       </div>
     </header>
     <div class="content" id="contentArea"></div>
@@ -342,7 +375,7 @@ ALERTS.slice(0,4).map(a=>'<div class="alert-item '+a.type+'"><div class="alert-i
 '</div></div></div>';
 }
 function renderAssets(){
-return '<div class="fade-in"><div class="page-header"><div class="page-title">Obyektlar ro\'yxati <span class="count-badge">6 obyekt</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Eksport...\')">Eksport</button><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi obyekt\')">+ Yangi obyekt</button></div></div><div style="display:flex;gap:10px;margin-bottom:20px"><div class="search-box" style="flex:1"><svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" placeholder="Obyekt nomi bo\'yicha qidirish..."></div><select class="filter-dropdown"><option>Barcha hududlar</option><option>Toshkent sh.</option><option>Toshkent vil.</option></select><select class="filter-dropdown"><option>Barcha turlar</option><option>Biznes markazi</option><option>Savdo markazi</option></select><select class="filter-dropdown"><option>Barcha statuslar</option><option>Faol</option><option>Rejada</option></select></div><div class="card" style="overflow:hidden"><table class="data-table"><thead><tr><th>OBYEKT</th><th>HUDUD</th><th>TURI</th><th>STATUS</th><th>QIYMATI</th><th>SIFAT</th><th></th></tr></thead><tbody>'+
+return '<div class="fade-in"><div class="page-header"><div class="page-title">Obyektlar ro\'yxati <span class="count-badge">6 obyekt</span></div><div class="page-actions"><button class="btn btn-outline btn-sm" onclick="showToast(\'Eksport...\')">Eksport</button><button class="btn btn-primary btn-sm" onclick="showToast(\'Yangi obyekt\')">+ Yangi obyekt</button></div></div><div style="display:flex;gap:10px;margin-bottom:20px"><div class="search-box" style="flex:1"><svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" placeholder="Obyekt nomi bo\'yicha qidirish..."></div><select class="filter-dropdown" onchange="filterAssets()" id="filterRegion"><option value="">Barcha hududlar</option><option value="Toshkent sh.">Toshkent sh.</option><option value="Toshkent vil.">Toshkent vil.</option></select><select class="filter-dropdown" onchange="filterAssets()" id="filterType"><option value="">Barcha turlar</option><option value="Biznes markazi">Biznes markazi</option><option value="Savdo markazi">Savdo markazi</option><option value="Ofis binosi">Ofis binosi</option><option value="Turar-joy">Turar-joy</option><option value="Dacha">Dacha</option><option value="Yer maydoni">Yer maydoni</option></select><select class="filter-dropdown" onchange="filterAssets()" id="filterStatus"><option value="">Barcha statuslar</option><option value="active">Faol</option><option value="maintenance">Ta'mirda</option><option value="planned">Rejada</option></select></div><div class="card" style="overflow:hidden"><table class="data-table"><thead><tr><th>OBYEKT</th><th>HUDUD</th><th>TURI</th><th>STATUS</th><th>QIYMATI</th><th>SIFAT</th><th></th></tr></thead><tbody>'+
 ASSETS.map(a=>'<tr onclick="navigateTo(\'asset-detail\','+a.id+')" style="cursor:pointer"><td><div style="display:flex;align-items:center;gap:12px"><img src="'+a.img+'" style="width:40px;height:40px;border-radius:10px;object-fit:cover"><div><div style="font-weight:600">'+a.name+'</div><div style="font-size:11px;color:var(--text-3);font-family:IBM Plex Mono,monospace">'+a.code+'</div></div></div></td><td>'+a.region+'</td><td>'+a.type+'</td><td><span class="status-badge '+a.status+'"><span class="status-dot"></span>'+(a.status==='active'?'Faol':a.status==='maintenance'?"Ta'mirda":'Rejada')+'</span></td><td style="font-weight:700">'+a.value+'</td><td><span style="font-weight:700;color:'+(a.score>=80?'var(--green)':a.score>=60?'var(--orange)':'var(--red)')+'">'+a.score+'</span></td><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-3)"><path d="M9 18l6-6-6-6"/></svg></td></tr>').join('')+
 '</tbody></table></div></div>';
 }
@@ -531,7 +564,136 @@ errors.map(e=>'<div class="error-card"><div class="error-icon" style="background
 function initMap(){const container=document.getElementById('mapContainer');if(!container)return;MAP_MARKERS.forEach(m=>{const el=document.createElement('div');el.className='map-marker';el.style.left=m.x+'%';el.style.top=m.y+'%';el.style.background=m.status==='active'?'#7BC142':m.status==='maintenance'?'#F97316':'#2D7FF9';el.innerHTML='<div class="label">'+m.name+' - '+m.value+'</div>';el.onclick=()=>showToast('Marker: '+m.name);container.appendChild(el);});}
 function toggleFilter(key){activeFilter=activeFilter===key?null:key;navigateTo('dashboard');setTimeout(initMap,10);}
 function startTime(){const update=()=>{const d=new Date();const t=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');const el=document.getElementById('timeDisplay');if(el)el.textContent=t;};update();setInterval(update,1000);}
+function openModal(id){document.getElementById(id).classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
 function showToast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{t.remove()},2500);}
 </script>
+
+<!-- Report Modal -->
+<div class="modal-overlay" id="reportModal" onclick="if(event.target===this)closeModal('reportModal')">
+<div class="modal">
+<div class="modal-header"><h3>Hisobot yaratish</h3><div class="modal-close" onclick="closeModal('reportModal')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+<div class="modal-body">
+<div style="font-size:13px;font-weight:600;color:var(--text-3);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">Hisobot turi</div>
+<div class="report-type-grid">
+<div class="report-type-card selected" onclick="selectReportType(this)"><div class="rt-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div><div><div class="rt-title">Moliyaviy hisobot</div><div class="rt-desc">Daromad, xarajatlar, foyda</div></div></div>
+<div class="report-type-card" onclick="selectReportType(this)"><div class="rt-icon blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div><div><div class="rt-title">Aktivlar hisoboti</div><div class="rt-desc">Barcha obyektlar bo'yicha</div></div></div>
+<div class="report-type-card" onclick="selectReportType(this)"><div class="rt-icon orange"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><div class="rt-title">Texnik hisobot</div><div class="rt-desc">Kameralar, uskunalar holati</div></div></div>
+<div class="report-type-card" onclick="selectReportType(this)"><div class="rt-icon purple"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="rt-title">Shartnomalar hisoboti</div><div class="rt-desc">Lizing, ijara holati</div></div></div>
+</div>
+<div class="form-group"><label>Davr</label>
+<div class="date-range">
+<select id="reportPeriod"><option value="month">Oylik</option><option value="quarter">Choraklik</option><option value="year">Yillik</option><option value="custom">Maxsus davr</option></select>
+<select id="reportYear"><option>2026</option><option>2025</option><option>2024</option></select>
+</div></div>
+<div class="form-group"><label>Format</label>
+<select id="reportFormat"><option>PDF</option><option>Excel (XLSX)</option><option>CSV</option></select>
+</div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeModal('reportModal')">Bekor qilish</button>
+<button class="btn btn-primary" onclick="generateReport()">Hisobot yaratish</button>
+</div>
+</div></div>
+
+<!-- New Asset Modal -->
+<div class="modal-overlay" id="newAssetModal" onclick="if(event.target===this)closeModal('newAssetModal')">
+<div class="modal">
+<div class="modal-header"><h3>Yangi obyekt qo'shish</h3><div class="modal-close" onclick="closeModal('newAssetModal')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+<div class="modal-body">
+<div class="form-group"><label>Obyekt nomi</label><input type="text" placeholder="Masalan: Yangi biznes markazi"></div>
+<div class="form-row">
+<div class="form-group"><label>Turi</label><select><option>Biznes markazi</option><option>Savdo markazi</option><option>Ofis binosi</option><option>Turar-joy</option><option>Dacha</option><option>Yer maydoni</option></select></div>
+<div class="form-group"><label>Hudud</label><select><option>Toshkent sh.</option><option>Toshkent vil.</option><option>Andijon</option><option>Samarqand</option><option>Buxoro</option></select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Maydon (m²)</label><input type="number" placeholder="0"></div>
+<div class="form-group"><label>Qavatlar soni</label><input type="number" placeholder="0"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Baholangan qiymat (so'm)</label><input type="number" placeholder="0"></div>
+<div class="form-group"><label>Status</label><select><option>Faol</option><option>Ta'mirda</option><option>Rejada</option></select></div>
+</div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeModal('newAssetModal')">Bekor qilish</button>
+<button class="btn btn-primary" onclick="closeModal('newAssetModal');showToast('Obyekt qo\'shildi')">Saqlash</button>
+</div>
+</div></div>
+
+<!-- New Contract Modal -->
+<div class="modal-overlay" id="newContractModal" onclick="if(event.target===this)closeModal('newContractModal')">
+<div class="modal">
+<div class="modal-header"><h3>Yangi shartnoma</h3><div class="modal-close" onclick="closeModal('newContractModal')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+<div class="modal-body">
+<div class="form-group"><label>Mijoz</label><input type="text" placeholder="Masalan: RSG Group LLC"></div>
+<div class="form-row">
+<div class="form-group"><label>Obyekt</label><select><option>Green Tower</option><option>Mega Mall</option><option>Humo Office</option><option>Nurafshon saroy</option></select></div>
+<div class="form-group"><label>Shartnoma turi</label><select><option>Ijara</option><option>Lizing</option><option>Co-working</option></select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Oylik to'lov (so'm)</label><input type="number" placeholder="0"></div>
+<div class="form-group"><label>Muddat (oy)</label><select><option>3 oy</option><option>6 oy</option><option>12 oy</option><option>24 oy</option></select></div>
+</div>
+<div class="form-group"><label>Izoh</label><textarea placeholder="Qo'shimcha ma'lumot..."></textarea></div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeModal('newContractModal')">Bekor qilish</button>
+<button class="btn btn-primary" onclick="closeModal('newContractModal');showToast('Shartnoma yaratildi')">Saqlash</button>
+</div>
+</div></div>
+
+<!-- New Camera Modal -->
+<div class="modal-overlay" id="newCameraModal" onclick="if(event.target===this)closeModal('newCameraModal')">
+<div class="modal">
+<div class="modal-header"><h3>Yangi kamera qo'shish</h3><div class="modal-close" onclick="closeModal('newCameraModal')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+<div class="modal-body">
+<div class="form-group"><label>Kamera nomi</label><input type="text" placeholder="Masalan: CAM-05"></div>
+<div class="form-row">
+<div class="form-group"><label>Obyekt</label><select><option>Green Tower</option><option>Mega Mall</option><option>Humo Office</option></select></div>
+<div class="form-group"><label>Joylashuv</label><select><option>Kirish</option><option>Lobby</option><option>Parking</option><option>Tom</option><option>Zal</option></select></div>
+</div>
+<div class="form-group"><label>Kamera turi</label><select><option>IP kamera</option><option>PTZ kamera</option><option>Dome kamera</option><option>Termal kamera</option></select></div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeModal('newCameraModal')">Bekor qilish</button>
+<button class="btn btn-primary" onclick="closeModal('newCameraModal');showToast('Kamera qo\'shildi')">Saqlash</button>
+</div>
+</div></div>
+
+<!-- New Folder Modal -->
+<div class="modal-overlay" id="newFolderModal" onclick="if(event.target===this)closeModal('newFolderModal')">
+<div class="modal">
+<div class="modal-header"><h3>Yangi papka</h3><div class="modal-close" onclick="closeModal('newFolderModal')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div></div>
+<div class="modal-body">
+<div class="form-group"><label>Papka nomi</label><input type="text" placeholder="Masalan: Yangi hujjatlar"></div>
+<div class="form-group"><label>Rang</label><select><option>Yashil</option><option>Ko'k</option><option>Orange</option><option>Binafsha</option></select></div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeModal('newFolderModal')">Bekor qilish</button>
+<button class="btn btn-primary" onclick="closeModal('newFolderModal');showToast('Papka yaratildi')">Saqlash</button>
+</div>
+</div></div>
+
+<!-- Toast container -->
+<div class="toast" id="toast"></div>
+
+<script>
+function filterAssets(){
+var region=document.getElementById('filterRegion')?document.getElementById('filterRegion').value:'';
+var type=document.getElementById('filterType')?document.getElementById('filterType').value:'';
+var status=document.getElementById('filterStatus')?document.getElementById('filterStatus').value:'';
+var rows=document.querySelectorAll('.data-table tbody tr');
+rows.forEach(function(r){
+var rText=r.textContent;
+r.style.display=((!region||rText.indexOf(region)>=0)&&(!type||rText.indexOf(type)>=0)&&(!status||r.classList.contains(status)||r.innerHTML.indexOf(status)>=0))?'':'none';
+});
+}
+function selectReportType(el){document.querySelectorAll('.report-type-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected')}
+function generateReport(){closeModal('reportModal');var t=document.getElementById('toast');t.textContent='Hisobot generatsiya qilinmoqda...';t.classList.add('show');setTimeout(function(){t.textContent='✓ Hisobot tayyor!';setTimeout(function(){t.classList.remove('show')},2000)},1500)}
+function exportCSV(){var t=document.getElementById('toast');t.textContent='Eksport qilinmoqda (CSV)...';t.classList.add('show');setTimeout(function(){t.textContent='✓ Eksport tayyor!';setTimeout(function(){t.classList.remove('show')},2000)},1200)}
+function markAllRead(){var badge=document.querySelector('.nav-item[data-page="notifications"] .badge');if(badge)badge.style.display='none';var t=document.getElementById('toast');t.textContent='Barcha bildirishnomalar o\'qildi';t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2000)}
+</script>
+
 </body>
 </html>
